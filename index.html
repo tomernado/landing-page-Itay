@@ -1,0 +1,143 @@
+<!-- <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
+<%
+    // קונטקסט של האפליקציה (למשל /ItayItzhakiPage_war_exploded)
+    final String CTX = request.getContextPath();
+    // ערך לשבירת קאש (כדי לוודא שהתמונה/‏CSS נטענים מחדש אחרי שינוי)
+    final long V = System.currentTimeMillis();
+%> -->
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>איתי יצחקי — הופכים את האירוע שלך לבלתי נשכח</title>
+
+    <!-- גופן (לא חובה) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;600;800&display=swap" rel="stylesheet">
+
+    <!-- CSS שלך עם context path ושבירת קאש -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- ביטוח קטן למקרה שה-CSS הישן נטען מהקאש -->
+    <style>
+        .hero__portrait{aspect-ratio:1/1;overflow:hidden;border-radius:28px;background:#ffe7ec}
+        .hero__portrait img{width:100%;height:100%;object-fit:cover;display:block}
+    </style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+    <div class="hero__wrap container">
+
+        <div class="hero__copy">
+            <span class="badge">איתי יצחקי · מנחה אירועים</span>
+            <h1>✨ הופכים את האירוע שלך לבלתי נשכח ✨</h1>
+            <p class="sub">8+ שנות ניסיון ו־900+ אירועים. הנחיה שמרימה את האולם — זורם, מרגש ובוייב נכון.</p>
+            <div class="cta-row">
+                <a href="#form" class="btn btn--primary">בדיקת זמינות</a>
+                <a href="#form" class="btn btn--ghost">קבלת הצעת מחיר</a>
+            </div>
+        </div>
+
+        <!-- התמונה — תמיד עם נתיב נכון -->
+        <div class="hero__portrait">
+            <img src="IMG/itay.jpg" alt="Itay Host">
+        </div>
+    </div>
+
+    <div class="hero__pills container">
+        <ul class="pills">
+            <li>🎤 אנרגיה שמדליקה את הקהל</li>
+            <li>📆 זמינות מהירה</li>
+            <li>📸 אופציה לחבילת צילום</li>
+            <li>⭐️ עשרות המלצות חמות</li>
+        </ul>
+    </div>
+</header>
+
+<!-- ===== FORM ===== -->
+<main class="container">
+    <section id="form" class="form-card">
+        <div class="form-card__head">
+            <h2>בדיקת זמינות וקליטת פרטים</h2>
+            <p class="muted">ממלאים 30 שניות — ואני חוזר אליך עם כל הפרטים המתאימים לאירוע שלך.</p>
+        </div>
+
+        <!-- אם אתה עובד עם Formspree — החלף את YOUR_FORMSPREE_ENDPOINT -->
+        <form id="leadForm" action="YOUR_FORMSPREE_ENDPOINT" method="POST">
+            <input type="hidden" name="_subject" value="פנייה חדשה - Itay Events">
+            <input type="text" name="_gotcha" style="display:none">
+
+            <div class="grid">
+                <label class="field">
+                    <span>שם מלא</span>
+                    <input type="text" name="name" autocomplete="name" required>
+                </label>
+
+                <label class="field">
+                    <span>טלפון נייד</span>
+                    <input type="tel" name="phone" autocomplete="tel" required>
+                </label>
+            </div>
+
+            <label class="field">
+                <span>סוג האירוע</span>
+                <input type="text" name="event" placeholder="בר/בת מצווה, יום הולדת, חתונה…" required>
+            </label>
+
+            <fieldset class="options">
+                <legend>מעבר להנחיה שמגיעה עם תקליטן, ניתן להוסיף צלם:</legend>
+                <label><input type="radio" name="photoOption" value="צלם מגנטים + סטילס" required> צלם מגנטים + סטילס</label>
+                <label><input type="radio" name="photoOption" value="צלם סטילס"> צלם סטילס</label>
+                <label><input type="radio" name="photoOption" value="לא מעוניינ/ת"> לא מעוניינ/ת</label>
+            </fieldset>
+
+            <label class="field">
+                <span>הערות נוספות</span>
+                <textarea name="note" rows="4" placeholder="מה חשוב לך לציין?"></textarea>
+            </label>
+
+            <button class="btn btn--primary" type="submit">שליחה</button>
+            <p class="tiny muted privacy">לעולם לא נמסור את הפרטים שלך לגורם אחר.</p>
+
+            <div id="thanks" class="thanks" hidden>✅ תודה! קיבלנו את הפרטים ונחזור אליך ממש בקרוב.</div>
+        </form>
+    </section>
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+    <p>© 2025 איתי יצחקי — כל הזכויות שמורות</p>
+</footer>
+
+<!-- JS קטן שמראה הודעת תודה אם עובדים עם Formspree (לא חובה) -->
+<script>
+    (function () {
+        var form = document.getElementById('leadForm');
+        if (!form) return;
+        if (form.action.indexOf('formspree') === -1) return; // רק אם עובדים עם Formspree
+
+        form.addEventListener('submit', async function (e) {
+            e.preventDefault();
+            var btn = form.querySelector('button');
+            btn.disabled = true;
+            try {
+                var res = await fetch(form.action, { method: 'POST', body: new FormData(form) });
+                if (res.ok) {
+                    form.reset();
+                    document.getElementById('thanks').hidden = false;
+                } else {
+                    alert('השליחה נכשלה. נסה/י שוב בעוד רגע.');
+                }
+            } catch (err) {
+                alert('שגיאת רשת. נסה/י שוב.');
+            }
+            btn.disabled = false;
+        });
+    })();
+</script>
+</body>
+</html>
