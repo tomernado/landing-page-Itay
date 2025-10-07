@@ -39,8 +39,24 @@
             <div class="cta-row">
                 <a href="#form" class="btn btn--primary">בדיקת זמינות</a>
                 <a href="#form" class="btn btn--ghost">קבלת הצעת מחיר</a>
+                <div style="flex-grow:1">
+                <button  onclick="window.open('https://wa.me/972542488427', '_blank')"  
+                style="background-color: #25D366; 
+                    color: white; 
+                    border: none; 
+                    padding: 12px 24px; 
+                    font-size: 16px; 
+                    border-radius: 8px;
+                    margin-top: 12px; 
+                    cursor: pointer;">
+        💬 שלח לי הודעה ב־WhatsApp
+            </button>
+                </div>
             </div>
+
         </div>
+
+
 
         <!-- התמונה — תמיד עם נתיב נכון -->
         <div class="hero__portrait">
@@ -74,18 +90,18 @@
             <div class="grid">
                 <label class="field">
                     <span>שם מלא</span>
-                    <input type="text" name="name" autocomplete="name" required>
+                    <input id="customerName" type="text" name="name" autocomplete="name" required>
                 </label>
 
                 <label class="field">
                     <span>טלפון נייד</span>
-                    <input type="tel" name="phone" autocomplete="tel" required>
+                    <input id="phone" type="tel" name="phone" autocomplete="tel" required>
                 </label>
             </div>
 
             <label class="field">
                 <span>סוג האירוע</span>
-                <input type="text" name="event" placeholder="בר/בת מצווה, יום הולדת, חתונה…" required>
+                <input id="subject" type="text" name="event" placeholder="בר/בת מצווה, יום הולדת, חתונה…" required>
             </label>
 
             <fieldset class="options">
@@ -97,10 +113,12 @@
 
             <label class="field">
                 <span>הערות נוספות</span>
-                <textarea name="note" rows="4" placeholder="מה חשוב לך לציין?"></textarea>
+                <textarea id="notes" name="note" rows="4" placeholder="מה חשוב לך לציין?"></textarea>
             </label>
 
-            <button class="btn btn--primary" type="submit">שליחה</button>
+            <button class="btn btn--primary" style=" color: #fff;
+    background: linear-gradient(135deg, #addf8b 0%, #68f756 52%, #48c738 100%);
+    box-shadow: 0 18px 50px rgba(255, 59, 107, .36); width: 100%; font-family: 'Heebo';"submit" onclick="sendWhatsApp()">שליחת פרטים ב־WhatsApp</button>
             <p class="tiny muted privacy">לעולם לא נמסור את הפרטים שלך לגורם אחר.</p>
 
             <div id="thanks" class="thanks" hidden>✅ תודה! קיבלנו את הפרטים ונחזור אליך ממש בקרוב.</div>
@@ -115,6 +133,55 @@
 
 <!-- JS קטן שמראה הודעת תודה אם עובדים עם Formspree (לא חובה) -->
 <script>
+    
+    function sendWhatsApp() {
+        // איסוף שדות מהטופס
+        var nameEl   = document.getElementById('customerName');
+        var phoneEl  = document.getElementById('phone');
+        var eventEl  = document.getElementById('subject');
+        var notesEl  = document.getElementById('notes');
+        var photoOpt = document.querySelector('input[name="photoOption"]:checked');
+
+        var name  = nameEl ? nameEl.value.trim() : '';
+        var phone = phoneEl ? phoneEl.value.trim() : '';
+        var eventType = eventEl ? eventEl.value.trim() : '';
+        var notes = notesEl ? notesEl.value.trim() : '';
+        var photo = photoOpt ? photoOpt.value : '';
+
+        // ולידציה בסיסית לשדות חובה
+        if (!name || !phone || !eventType) {
+        // גלילה לטופס והדגשה קלה לשדות חסרים
+        document.getElementById('form')?.scrollIntoView({behavior:'smooth', block:'start'});
+        [nameEl, phoneEl, eventEl].forEach(function (el) {
+            if (el && !el.value.trim()) {
+            el.style.outline = '2px solid #ff4d4f';
+            setTimeout(function(){ el.style.outline = ''; }, 1500);
+            }
+        });
+        alert('נא למלא שם מלא, טלפון וסוג אירוע לפני שליחה ב־WhatsApp.');
+        return;
+        }
+
+        // בניית ההודעה
+        var lines = [
+        'פנייה חדשה מהאתר:',
+        'שם: ' + name,
+        'טלפון: ' + phone,
+        'סוג אירוע: ' + eventType,
+        (photo ? 'חבילת צילום: ' + photo : 'חבילת צילום: -'),
+        (notes ? 'הערות: ' + notes : 'הערות: -'),
+        '',
+        ];
+        var msg = lines.join('\n');
+
+        // מספר היעד ב־WhatsApp (בפורמט בינלאומי, ללא 0 בתחילת המספר המקומי)
+        var target = '972542488427';
+
+        // פתיחת WhatsApp עם טקסט מוכן
+        var waUrl = 'https://wa.me/' + target + '?text=' + encodeURIComponent(msg);
+        window.open(waUrl, '_blank');
+    }
+    
     (function () {
         var form = document.getElementById('leadForm');
         if (!form) return;
