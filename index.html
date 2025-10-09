@@ -1,8 +1,8 @@
 <!-- <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%
-    // קונטקסט של האפליקציה (למשל /ItayItzhakiPage_war_exploded)
+   
     final String CTX = request.getContextPath();
-    // ערך לשבירת קאש (כדי לוודא שהתמונה/‏CSS נטענים מחדש אחרי שינוי)
+   
     final long V = System.currentTimeMillis();
 %> -->
 <!DOCTYPE html>
@@ -26,8 +26,43 @@
         .hero__portrait img{width:100%;height:100%;object-fit:cover;display:block}
     </style>
 </head>
-<!-- שכבת מטאורים דקה ועדינה -->
+<!-- Meteors: few, natural-looking -->
+<div class="meteors" aria-hidden="true">
+  <span class="meteor" style="--x:10%; --y:-12%; --delay:.8s;  --dur:7.2s;"></span>
+  <span class="meteor" style="--x:34%; --y:-18%; --delay:3.1s; --dur:8.0s;"></span>
+  <span class="meteor" style="--x:62%; --y:-14%; --delay:6.2s; --dur:7.6s;"></span>
+  <span class="meteor" style="--x:78%; --y:-20%; --delay:1.9s; --dur:8.4s;"></span>
+</div>
 
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const root  = document.querySelector('.reviews-wide');
+  if (!root) return;
+
+  const track = root.querySelector('.reviews-track');
+  const prev  = root.querySelector('.reviews-nav.prev');
+  const next  = root.querySelector('.reviews-nav.next');
+
+  // כמה לזוז בכל קליק: רוחב כרטיס + ה-gap
+  function step(){
+    const card = track.querySelector('.review');
+    const gap  = parseFloat(getComputedStyle(track).gap || 12);
+    return (card ? card.getBoundingClientRect().width : 300) + gap;
+  }
+
+  const move = (dx) => track.scrollBy({ left: dx, behavior: 'smooth' });
+
+  prev.addEventListener('click', () => move(-step()));
+  next.addEventListener('click', () => move( step()));
+
+  // אופציונלי: חיצים במקלדת כשהאזור בפוקוס
+  root.tabIndex = 0;
+  root.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft')  move(-step());
+    if (e.key === 'ArrowRight') move( step());
+  });
+});
+</script>
 
 <body class="theme-night">
 
@@ -56,6 +91,10 @@
         <div class="hero__portrait">
             <img src="IMG/itay.jpg" alt="Itay Host">
         </div>
+
+       
+
+
     </div>
 
     <div class="hero__pills container">
@@ -68,7 +107,32 @@
     </div>
 </header>
 
-<!-- ===== FORM ===== -->
+<!-- ===== REVIEWS WIDE (manual) ===== -->
+<section class="reviews-wide" aria-label="לקוחות ממליצים">
+  <div class="reviews-viewport">
+    <div class="reviews-track">
+      <figure class="review"><img src="IMG/IMG_6097.JPG" alt="המלצה 1"></figure>
+      <figure class="review"><img src="IMG/IMG_6098.PNG" alt="המלצה 2"></figure>
+      <figure class="review"><img src="IMG/IMG_6100.JPG" alt="המלצה 3"></figure>
+      <figure class="review"><img src="IMG/IMG_6101.JPG" alt="המלצה 4"></figure>
+      <figure class="review"><img src="IMG/IMG_6102.PNG" alt="המלצה 5"></figure>
+      <figure class="review"><img src="IMG/IMG_6103.JPG" alt="המלצה 6"></figure>
+      <figure class="review"><img src="IMG/IMG_6104.JPG" alt="המלצה 7"></figure>
+    </div>
+
+    <!-- גולל צד מותאם (ניתן לגרירה) -->
+    <div class="reviews-scrollbar" aria-hidden="true">
+      <div class="thumb"></div>
+    </div>
+
+    <!-- חצים -->
+  <button type="button" class="reviews-nav prev" aria-label="הקודם">‹</button>
+<button type="button" class="reviews-nav next" aria-label="הבא">›</button>
+
+  </div>
+</section>
+
+
 <main class="container">
     <section id="form" class="form-card">
         <div class="form-card__head">
@@ -76,7 +140,7 @@
             <p class="muted">ממלאים 30 שניות — ואני חוזר אליך עם כל הפרטים המתאימים לאירוע שלך.</p>
         </div>
 
-        <!-- אם אתה עובד עם Formspree — החלף את YOUR_FORMSPREE_ENDPOINT -->
+
         <form id="leadForm" action="YOUR_FORMSPREE_ENDPOINT" method="POST">
             <input type="hidden" name="_subject" value="פנייה חדשה - Itay Events">
             <input type="text" name="_gotcha" style="display:none">
@@ -111,7 +175,7 @@
             </label>
 
             <button class="btn btn--primary" style=" color: #fff;
-    background: linear-gradient(135deg, #addf8b 0%, #68f756 52%, #48c738 100%);
+    background: linear-gradient(135deg, #addf8b 0%, #5cc74e 52%, #48c738 100%);
     box-shadow: 0 18px 50px rgba(255, 59, 107, .36); width: 100%; font-family: 'Heebo';"submit" onclick="sendWhatsApp()">שליחת פרטים ב־WhatsApp</button>
             <p class="tiny muted privacy">לעולם לא נמסור את הפרטים שלך לגורם אחר.</p>
 <button  onclick="window.open('https://wa.me/972542488427', '_blank')"  
@@ -141,12 +205,18 @@
 
 
 
-<!-- ===== FOOTER ===== -->
 <footer class="footer">
     <p>© 2025 איתי יצחקי — כל הזכויות שמורות</p>
+<p>
+     אתר זה נבנה על ידי 
+        <a href="https://www.linkedin.com/in/tomer-cohen-486457346/" target="_blank" style="color: inherit; text-decoration: underline;">תומר כהן</a>
+</p>
 </footer>
 
-<!-- JS קטן שמראה הודעת תודה אם עובדים עם Formspree (לא חובה) -->
+
+
+
+
 <script>
     
     function sendWhatsApp() {
@@ -163,10 +233,9 @@
         var notes = notesEl ? notesEl.value.trim() : '';
         var photo = photoOpt ? photoOpt.value : '';
 
-        // ולידציה בסיסית לשדות חובה
         if (!name || !phone || !eventType) {
-        // גלילה לטופס והדגשה קלה לשדות חסרים
-        document.getElementById('form')?.scrollIntoView({behavior:'smooth', block:'start'});
+
+            document.getElementById('form')?.scrollIntoView({behavior:'smooth', block:'start'});
         [nameEl, phoneEl, eventEl].forEach(function (el) {
             if (el && !el.value.trim()) {
             el.style.outline = '2px solid #ff4d4f';
@@ -179,7 +248,7 @@
 
         // בניית ההודעה
         var lines = [
-        'היי איתי! הנה הפרטים שלי:',
+        'היי איתי! אשמח להשאיר פרטים לחווית',
         'שם: ' + name,
         'טלפון: ' + phone,
         'סוג אירוע: ' + eventType,
@@ -190,7 +259,7 @@
         var msg = lines.join('\n');
 
         // מספר היעד ב־WhatsApp (בפורמט בינלאומי, ללא 0 בתחילת המספר המקומי)
-        var target = '972542488427';
+        var target = '972559950111';
 
         // פתיחת WhatsApp עם טקסט מוכן
         var waUrl = 'https://wa.me/' + target + '?text=' + encodeURIComponent(msg);
@@ -221,5 +290,30 @@
         });
     })();
 </script>
+
+<!-- Meteors (few, subtle) -->
+
+<div class="meteors" aria-hidden="true">
+  <span class="m"></span>
+  <span class="m"></span>
+  <span class="m"></span>
+  <span class="m"></span>
+  <span class="m"></span>
+  <span class="m"></span>
+  <span class="m"></span>
+  <span class="m"></span>
+  <span class="m"></span>
+  <span class="m"></span>
+  <span class="m"></span>
+  <span class="m"></span>
+  <span class="m"></span>
+    <span class="m"></span>
+
+</div>
+
+
+</div>
+
 </body>
+
 </html>

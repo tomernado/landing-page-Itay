@@ -378,30 +378,7 @@ button[type="submit"] {
     linear-gradient(180deg, var(--night) 0%, var(--night-2) 55%, var(--night-3) 100%);
 }
 
-/* Stars — denser + shimmer */
-.theme-night::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -2;
-  pointer-events: none;
-  opacity: .95;
-  background-image:
-    radial-gradient(2px   2px   at 20% 30%, rgba(255,255,255,.95) 40%, transparent 41%),
-    radial-gradient(1.6px 1.6px at 70% 20%, rgba(255,255,255,.85) 40%, transparent 41%),
-    radial-gradient(1.2px 1.2px at 40% 70%, rgba(255,255,255,.80) 40%, transparent 41%),
-    radial-gradient(1px   1px   at 85% 65%, rgba(255,255,255,.75) 40%, transparent 41%),
-    radial-gradient(0.8px 0.8px at 15% 80%, rgba(255,255,255,.70) 40%, transparent 41%),
-    radial-gradient(1px   1px   at 10% 15%, rgba(255,255,255,.85) 40%, transparent 41%),
-    radial-gradient(1px   1px   at 55% 45%, rgba(255,255,255,.90) 40%, transparent 41%),
-    radial-gradient(0.8px 0.8px at 35% 85%, rgba(255,255,255,.80) 40%, transparent 41%),
-    radial-gradient(1.2px 1.2px at 90% 35%, rgba(255,255,255,.90) 40%, transparent 41%),
-    radial-gradient(1px   1px   at 75% 80%, rgba(255,255,255,.85) 40%, transparent 41%);
-  background-size:
-    400px 400px, 360px 360px, 300px 300px, 520px 520px, 440px 440px,
-    280px 280px, 320px 320px, 260px 260px, 300px 300px, 240px 240px;
-  animation: twinkle 6s ease-in-out infinite alternate;
-}
+
 
 @keyframes twinkle {
   0%   { opacity: .8;  filter: brightness(1);    }
@@ -457,52 +434,297 @@ button[type="submit"] {
   accent-color: var(--brand);
 }
 
-/* -------------------------------
-   Meteors (visible)
-   Requires: <div class="meteors"></div> before </body>
--------------------------------- */
-.meteors {
-  position: fixed;
-  inset: 0;
-  z-index: -1;              /* above stars (-2/-3), below content */
-  pointer-events: none;
+
+.theme-night::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-2;
+  pointer-events:none;
+  opacity:.98;
+
+  /* הרבה שכבות עם אריחים קטנים יותר לצפיפות גבוהה */
+  background-image:
+    radial-gradient(2px 2px   at  7%  9%,  rgba(255,255,255,.95) 40%, transparent 41%),
+    radial-gradient(1.8px 1.8px at 18% 22%, rgba(255,255,255,.90) 40%, transparent 41%),
+    radial-gradient(1.6px 1.6px at 30% 15%, rgba(255,255,255,.85) 40%, transparent 41%),
+    radial-gradient(1.4px 1.4px at 43% 28%, rgba(255,255,255,.80) 40%, transparent 41%),
+    radial-gradient(1.2px 1.2px at 52% 12%, rgba(255,255,255,.80) 40%, transparent 41%),
+    radial-gradient(1px 1px     at 63% 24%, rgba(255,255,255,.75) 40%, transparent 41%),
+    radial-gradient(0.9px 0.9px at 75% 18%, rgba(255,255,255,.72) 40%, transparent 41%),
+    radial-gradient(1.2px 1.2px at 88% 26%, rgba(255,255,255,.78) 40%, transparent 41%),
+
+    radial-gradient(2px 2px     at 12% 64%, rgba(255,255,255,.95) 40%, transparent 41%),
+    radial-gradient(1.6px 1.6px at 24% 72%, rgba(255,255,255,.85) 40%, transparent 41%),
+    radial-gradient(1.3px 1.3px at 36% 66%, rgba(255,255,255,.82) 40%, transparent 41%),
+    radial-gradient(1px 1px     at 49% 78%, rgba(255,255,255,.76) 40%, transparent 41%),
+    radial-gradient(0.9px 0.9px at 58% 60%, rgba(255,255,255,.70) 40%, transparent 41%),
+    radial-gradient(1.2px 1.2px at 70% 73%, rgba(255,255,255,.78) 40%, transparent 41%),
+    radial-gradient(1px 1px     at 82% 67%, rgba(255,255,255,.74) 40%, transparent 41%),
+    radial-gradient(0.9px 0.9px at 93% 79%, rgba(255,255,255,.70) 40%, transparent 41%),
+
+    /* “אבק” עדין של כוכבים מאוד קטנים */
+    radial-gradient(0.7px 0.7px at 10% 40%, rgba(255,255,255,.65) 40%, transparent 41%),
+    radial-gradient(0.6px 0.6px at 33% 52%, rgba(255,255,255,.60) 40%, transparent 41%),
+    radial-gradient(0.6px 0.6px at 61% 34%, rgba(255,255,255,.62) 40%, transparent 41%),
+    radial-gradient(0.6px 0.6px at 84% 46%, rgba(255,255,255,.60) 40%, transparent 41%);
+
+  /* אריחים קטנים יותר = צפיפות גדולה יותר */
+  background-size:
+    240px 240px, 220px 220px, 200px 200px, 200px 200px, 180px 180px, 180px 180px, 160px 160px, 160px 160px,
+    240px 240px, 220px 220px, 200px 200px, 200px 200px, 180px 180px, 180px 180px, 160px 160px, 160px 160px,
+    140px 140px, 140px 140px, 140px 140px, 140px 140px;
+
+  background-repeat: repeat;
+
+  /* הבהוב עדין מאוד */
+  animation: twinkle-boost 7s ease-in-out infinite alternate;
+}
+
+/* הבהוב מעט מודגש יותר אך נקי */
+@keyframes twinkle-boost{
+  0%   { opacity:.85; filter:brightness(1);    }
+  100% { opacity:1;   filter:brightness(1.18); }
+}
+
+/* =========================================================
+   Subtle Falling Meteors (heads + short tails)
+   ========================================================= */
+.meteors{
+  position:fixed;
+  inset:0;
+  z-index:-1;                 /* מעל הכוכבים, מתחת לתוכן */
+  pointer-events:none;
+  overflow:hidden;
+}
+
+/* מטאור יחיד */
+.meteor{
+  position:absolute;
+  left:var(--x,50%);
+  top:var(--y,-15%);
+  width:2px;                  /* רוחב הזנב */
+  height:110px;               /* אורך הזנב */
+  transform:rotate(-32deg);
+  opacity:0;
+  animation:meteor-move var(--dur,8s) linear infinite;
+  animation-delay:var(--delay,0s);
+}
+
+/* ראש מבריק (“כדור”) */
+.meteor::before{
+  content:"";
+  position:absolute;
+  top:60%;
+  left:50%;
+  width:7px; height:7px;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  background:#fff;
+  filter:drop-shadow(0 0 12px rgba(255,255,255,.9))
+         drop-shadow(0 0 22px rgba(255,255,255,.7));
+}
+
+/* זנב מטושטש ומצטמצם, מתמוסס לסוף */
+.meteor::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to bottom,
+              rgba(255,255,255,0) 0%,
+              rgba(255,255,255,.9) 58%,
+              rgba(255,255,255,0) 100%);
+  filter:blur(.35px) drop-shadow(0 0 6px rgba(255,255,255,.75));
+  /* מצמצם לקראת הסוף כדי שלא ייראה “קו” ישר */
+  mask-image:linear-gradient(to bottom, black 0%, black 58%, transparent 100%);
+}
+
+/* תנועה אלכסונית עם דעיכה עדינה + “וויבול” קטן כדי להרגיש טבעי */
+@keyframes meteor-move{
+  0%   { opacity:0; transform:translate3d(0,0,0) rotate(-32deg) }
+  8%   { opacity:1 }
+  35%  { transform:translate3d(18vw, 18vh, 0) rotate(-32deg) }
+  48%  { transform:translate3d(30vw, 31vh, 0) rotate(-33deg) }
+  60%  { opacity:.25; transform:translate3d(40vw, 42vh, 0) rotate(-33deg) }
+  70%  { opacity:0 }
+  100% { opacity:0; transform:translate3d(42vw, 46vh, 0) rotate(-33deg) }
+}
+
+/* עדין יותר בניידים */
+@media (max-width:640px){
+  .meteor{ height:80px }
+}
+
+/* נגישות – מכבה אם המשתמש ביקש להפחית אנימציות */
+@media (prefers-reduced-motion: reduce){
+  .meteor{ animation:none; opacity:0 }
+}
+/* ===== Meteor head at the front (end of the line) ===== */
+.meteor{
+  /* אין שינוי לתנועה/גובה/זווית */
+}
+
+.meteor::before{
+  /* הראש (העיגול) נמצא בקצה התחתון — כלומר בקדמת התנועה */
+  top: auto;
+  bottom: -2px;              /* מעט מעבר לקצה כדי שלא ייחתך */
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: #fff;
+  filter: drop-shadow(0 0 12px rgba(255,255,255,.9))
+          drop-shadow(0 0 22px rgba(255,255,255,.7));
+}
+
+.meteor::after{
+  /* הזנב יוצא מהראש כלפי מעלה (לאורך הרוטציה) ומתעמעם */
+  top: 0;
+  bottom: 8px;               /* מפנה מקום לראש */
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top,
+                rgba(255,255,255,.9) 0%,
+                rgba(255,255,255,.35) 45%,
+                rgba(255,255,255,0) 100%);
+  filter: blur(.35px) drop-shadow(0 0 6px rgba(255,255,255,.65));
+  /* מצמצם את סוף הזנב כדי שלא ייראה כמו קו ישר */
+  mask-image: linear-gradient(to top, black 0%, black 55%, transparent 100%);
+}
+
+/* ===== Meteor head smaller & attached to tail ===== */
+:root{
+  /* שליטה נוחה על הגודל/עובי */
+  --meteor-head: 4px;     /* קוטר העיגול (הראש) */
+  --meteor-line: 1.6px;   /* עובי הקו (הזנב) */
+  --meteor-glow: 6px;     /* עוצמת הזוהר סביב הראש */
+}
+
+/* הקו הדק של המטאור */
+.meteor{
+  width: var(--meteor-line);
+}
+
+/* ראש קטן וצמוד לקצה */
+.meteor::before{
+  width: var(--meteor-head);
+  height: var(--meteor-head);
+  bottom: -1px;                  /* ממש על הקצה של הקו */
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  border-radius: 50%;
+  /* זוהר עדין יותר כדי שלא יראה "כדור" גדול */
+  filter: drop-shadow(0 0 calc(var(--meteor-glow)*0.7) rgba(255,255,255,.85))
+          drop-shadow(0 0 calc(var(--meteor-glow)*1.4) rgba(255,255,255,.45));
+}
+
+/* זנב דק שמתחבר יפה לראש */
+.meteor::after{
+  background: linear-gradient(to top,
+              rgba(255,255,255,.9) 0%,
+              rgba(255,255,255,.35) 40%,
+              rgba(255,255,255,0) 100%);
+  mask-image: linear-gradient(to top, black 0%, black 52%, transparent 100%);
+}
+
+/* במסכים קטנים – עוד טיפה הקטנה, נראה טבעי יותר */
+@media (max-width: 640px){
+  :root{
+    --meteor-head: 3.2px;
+    --meteor-line: 1.4px;
+    --meteor-glow: 5px;
+  }
+}
+
+/* ======================================================
+   Reviews Wide — aligned with form, slightly larger cards
+====================================================== */
+.reviews-wide {
+  max-width: 1060px;          /* ⬅️ אותו רוחב כמו הטופס */
+  margin: 28px auto;           /* מרכז את האלמנט בעמוד */
+  padding: 0 20px;
+}
+
+.reviews-viewport {
+  position: relative;
+  width: 100%;
+  height: 190px;               /* ⬅️ טיפה יותר גבוה */
+  border-radius: 18px;
+  padding: 8px 44px;
+  background: rgba(20, 26, 56, .82);
+  border: 1px solid rgba(255, 255, 255, .10);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, .55);
   overflow: hidden;
 }
 
-/* Two sweeping layers so there's always motion */
-.meteors::before,
-.meteors::after {
-  content: "";
+.reviews-track {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  height: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  direction: ltr;               /* ⬅️ חיוני לתמיכה ב-RTL */
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.reviews-track::-webkit-scrollbar { display: none; }
+
+/* כרטיס יחיד */
+.review {
+  flex: 0 0 340px;              /* ⬅️ רוחב גדול יותר */
+  height: 100%;
+  background: rgba(255, 255, 255, .05);
+  border: 1px solid rgba(255, 255, 255, .08);
+  border-radius: 14px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .03),
+              0 10px 26px rgba(0, 0, 0, .45);
+  display: grid;
+  place-items: center;
+  scroll-snap-align: center;
+}
+
+.review img {
+  width: 96%;                   /* ⬅️ הגדלת התמונה */
+  height: 90%;
+  object-fit: contain;
+  border-radius: 10px;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, .35));
+}
+
+/* חצים */
+.reviews-nav {
   position: absolute;
-  inset: -20%;
-  background:
-    repeating-linear-gradient(
-      -25deg,
-      rgba(255,255,255,0)   0px,
-      rgba(255,255,255,0)  34px,
-      rgba(255,255,255,.96) 36px,
-      rgba(255,255,255,0)  40px
-    );
-  filter: drop-shadow(0 0 7px rgba(255,255,255,.75)) blur(.2px);
-  animation: meteors-sweep 9s linear infinite;
-  opacity: .85;             /* חיזוק הנראות */
+  top: 50%;
+  transform: translateY(-50%);
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, .18);
+  background: rgba(255, 255, 255, .10);
+  color: #fff;
+  font-size: 20px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  transition: transform .15s, background .15s;
+  z-index: 1;
+}
+.reviews-nav:hover {
+  transform: translateY(-50%) scale(1.08);
+  background: rgba(255, 255, 255, .18);
+}
+.reviews-nav.prev { right: 10px; }
+.reviews-nav.next { left: 10px; }
+
+@media (max-width: 720px) {
+  .reviews-wide { max-width: 100%; padding: 0 10px; }
+  .reviews-viewport { height: 170px; padding: 6px 36px; }
+  .review { flex-basis: 300px; }
 }
 
-.meteors::after {
-  background:
-    repeating-linear-gradient(
-      -30deg,
-      rgba(255,255,255,0)   0px,
-      rgba(255,255,255,0)  42px,
-      rgba(255,255,255,.92) 44px,
-      rgba(255,255,255,0)  48px
-    );
-  animation-duration: 12s;
-  animation-delay: 3.5s;
-  opacity: .65;
-}
-
-@keyframes meteors-sweep {
-  0%   { transform: translate3d(-10%, -10%, 0); }
-  100% { transform: translate3d( 10%,  10%, 0); }
-}
