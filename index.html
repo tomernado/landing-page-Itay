@@ -1,10 +1,4 @@
-<!-- <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
-<%
-   
-    final String CTX = request.getContextPath();
-   
-    final long V = System.currentTimeMillis();
-%> -->
+
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
@@ -26,6 +20,12 @@
         .hero__portrait img{width:100%;height:100%;object-fit:cover;display:block}
     </style>
 </head>
+
+
+
+<body class="theme-night"></body>
+
+
 <!-- Meteors: few, natural-looking -->
 <div class="meteors" aria-hidden="true">
   <span class="meteor" style="--x:10%; --y:-12%; --delay:.8s;  --dur:7.2s;"></span>
@@ -34,37 +34,7 @@
   <span class="meteor" style="--x:78%; --y:-20%; --delay:1.9s; --dur:8.4s;"></span>
 </div>
 
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const root  = document.querySelector('.reviews-wide');
-  if (!root) return;
 
-  const track = root.querySelector('.reviews-track');
-  const prev  = root.querySelector('.reviews-nav.prev');
-  const next  = root.querySelector('.reviews-nav.next');
-
-  // כמה לזוז בכל קליק: רוחב כרטיס + ה-gap
-  function step(){
-    const card = track.querySelector('.review');
-    const gap  = parseFloat(getComputedStyle(track).gap || 12);
-    return (card ? card.getBoundingClientRect().width : 300) + gap;
-  }
-
-  const move = (dx) => track.scrollBy({ left: dx, behavior: 'smooth' });
-
-  prev.addEventListener('click', () => move(-step()));
-  next.addEventListener('click', () => move( step()));
-
-  // אופציונלי: חיצים במקלדת כשהאזור בפוקוס
-  root.tabIndex = 0;
-  root.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowLeft')  move(-step());
-    if (e.key === 'ArrowRight') move( step());
-  });
-});
-</script>
-
-<body class="theme-night">
 
 
 <!-- ===== HERO ===== -->
@@ -74,12 +44,35 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="hero__copy">
             <span class="badge">איתי יצחקי · מנחה אירועים</span>
             <h1>✨ הופכים את האירוע שלך לבלתי נשכח ✨</h1>
-            <p class="sub">8+ שנות ניסיון ו־900+ אירועים. הנחיה שמרימה את האולם — זורם, מרגש ובוייב נכון.</p>
+            <p class="sub">נמאס לכם שהילדים יושבים כל יום הולדת בפלאפונים?</p>
+
+     <p class="sub">
+אחרי מעל ל8 שנות נסיון ומעל ל900 אירועים,מצאתי את הנוסחה המושלמת.
+הנחיה שמתאימה את עצמה לילדים-מגבשת,מצחיקה ולא מתפשרת.
+</p>
+
+     <p class="sub">
+אני ביחד עם הצוות שלי נבוא עד אליכם ונשלים את החתיכה החסרה ביום המושלם</p>
             <div class="cta-row">
                 <a href="#form" class="btn btn--primary">בדיקת זמינות</a>
                 <a href="#form" class="btn btn--ghost">קבלת הצעת מחיר</a>
+               
                 <div style="flex-grow:1">
-          
+           <div class="cta-social" aria-label="Social links">
+    <a class="social-btn ig" href="https://www.instagram.com/itayitzhaki1?igsh=NmEzdHNiZ3lkdWs2" target="_blank" rel="noopener" aria-label="Instagram">
+      <!-- Instagram SVG -->
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3.5A5.5 5.5 0 1 1 6.5 13 5.51 5.51 0 0 1 12 7.5zm0 2A3.5 3.5 0 1 0 15.5 13 3.5 3.5 0 0 0 12 9.5zM18.5 6a1 1 0 1 1-1 1 1 1 0 0 1 1-1z"/>
+      </svg>
+    </a>
+
+    <a class="social-btn tiktok" href="https://www.tiktok.com/@itayitzhaki1?_t=ZS-90VoJc0nIxA&_r=1" target="_blank" rel="noopener" aria-label="TikTok">
+      <!-- TikTok SVG -->
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M14 3h3.1a5.9 5.9 0 0 0 5 5V11a8.9 8.9 0 0 1-5-1.6v6.1A6.5 6.5 0 1 1 11 9.1V12a3.5 3.5 0 1 0 2 3.1V3z"/>
+      </svg>
+    </a>
+  </div>
                 </div>
             </div>
 
@@ -100,37 +93,185 @@ document.addEventListener('DOMContentLoaded', () => {
     <div class="hero__pills container">
         <ul class="pills">
             <li>🎤 אנרגיה שמדליקה את הקהל</li>
-            <li>📆 זמינות מהירה</li>
+            <li>📆 לו"ז מותאם ומסודר לכל האירוע</li>
             <li>📸 אופציה לחבילת צילום</li>
             <li>⭐️ עשרות המלצות חמות</li>
         </ul>
     </div>
 </header>
 
-<!-- ===== REVIEWS WIDE (manual) ===== -->
-<section class="reviews-wide" aria-label="לקוחות ממליצים">
-  <div class="reviews-viewport">
-    <div class="reviews-track">
-      <figure class="review"><img src="IMG/IMG_6097.JPG" alt="המלצה 1"></figure>
-      <figure class="review"><img src="IMG/IMG_6098.PNG" alt="המלצה 2"></figure>
-      <figure class="review"><img src="IMG/IMG_6100.JPG" alt="המלצה 3"></figure>
-      <figure class="review"><img src="IMG/IMG_6101.JPG" alt="המלצה 4"></figure>
-      <figure class="review"><img src="IMG/IMG_6102.PNG" alt="המלצה 5"></figure>
-      <figure class="review"><img src="IMG/IMG_6103.JPG" alt="המלצה 6"></figure>
-      <figure class="review"><img src="IMG/IMG_6104.JPG" alt="המלצה 7"></figure>
+<!-- ===== CLEAN REVIEWS CAROUSEL (RTL friendly) ===== -->
+<section id="reviewsCarousel" aria-label="לקוחות ממליצים">
+  <div class="rc-viewport">
+    <div class="rc-scroller" id="rcScroller">
+      <!-- שקפים מקוריים (החלף נתיבי תמונות לפי הצורך) -->
+      <figure class="rc-card"><img src="IMG/IMG_6097.JPG" alt="המלצה 1"></figure>
+      <figure class="rc-card"><img src="IMG/IMG_6098.PNG" alt="המלצה 2"></figure>
+      <figure class="rc-card"><img src="IMG/IMG_6100.JPG" alt="המלצה 3"></figure>
+      <figure class="rc-card"><img src="IMG/IMG_6101.JPG" alt="המלצה 4"></figure>
+      <figure class="rc-card"><img src="IMG/IMG_6102.PNG" alt="המלצה 5"></figure>
+      <figure class="rc-card"><img src="IMG/IMG_6103.JPG" alt="המלצה 6"></figure>
+      <figure class="rc-card"><img src="IMG/IMG_6104.JPG" alt="המלצה 7"></figure>
     </div>
 
-    <!-- גולל צד מותאם (ניתן לגרירה) -->
-    <div class="reviews-scrollbar" aria-hidden="true">
-      <div class="thumb"></div>
-    </div>
-
-    <!-- חצים -->
-  <button type="button" class="reviews-nav prev" aria-label="הקודם">‹</button>
-<button type="button" class="reviews-nav next" aria-label="הבא">›</button>
-
+    <button type="button" class="rc-nav rc-prev" aria-label="הקודם">‹</button>
+    <button type="button" class="rc-nav rc-next" aria-label="הבא">›</button>
   </div>
 </section>
+
+<style>
+/* ===== Scoped styles ===== */
+#reviewsCarousel{
+  max-width:1060px; margin:28px auto; padding:0 20px; direction:rtl;
+}
+#reviewsCarousel .rc-viewport{
+  position:relative; width:100%; height:240px;               /* גבוה יותר לקריאות */
+  border-radius:18px; padding:8px 52px;                      /* מקום לחיצים */
+  background:rgba(20,26,56,.82);
+  border:1px solid rgba(255,255,255,.10);
+  box-shadow:0 18px 48px rgba(0,0,0,.55);
+  overflow:hidden;
+}
+#reviewsCarousel .rc-scroller{
+  display:flex; align-items:center; gap:4px;                 /* רווח מינימלי */
+  height:100%;
+  overflow-x:auto; overflow-y:hidden;
+  scroll-snap-type:x mandatory;                              /* Snap חלק */
+  -webkit-overflow-scrolling:touch;
+  direction:ltr;                                             /* יציב ב-RTL */
+}
+/* מסתיר פס גלילה */
+#reviewsCarousel .rc-scroller::-webkit-scrollbar{ display:none; }
+#reviewsCarousel .rc-card{
+  flex:0 0 420px;                                            /* קלף גדול יותר */
+  height:100%;
+  scroll-snap-align:center;
+  border-radius:16px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.10);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.03), 0 10px 26px rgba(0,0,0,.45);
+  overflow:hidden;
+}
+#reviewsCarousel .rc-card img{
+  width:100%; height:100%;
+  object-fit:contain;                                        /* שומר טקסט קריא */
+  padding:6px;                                               /* נשימה קטנה */
+  display:block; border-radius:12px;
+}
+
+/* חיצים */
+#reviewsCarousel .rc-nav{
+  position:absolute; top:50%; transform:translateY(-50%);
+  width:38px; height:38px; border-radius:50%;
+  border:1px solid rgba(255,255,255,.18);
+  background:rgba(255,255,255,.14);
+  color:#fff; font-size:20px; display:grid; place-items:center;
+  cursor:pointer; backdrop-filter:blur(6px);
+  transition:transform .15s, background .15s, opacity .2s;
+  z-index:10; pointer-events:auto;
+}
+#reviewsCarousel .rc-nav:hover{ transform:translateY(-50%) scale(1.08); background:rgba(255,255,255,.22); }
+#reviewsCarousel .rc-prev{ right:10px; }
+#reviewsCarousel .rc-next{ left:10px; }
+
+@media (max-width: 720px){
+  #reviewsCarousel{ padding:0 10px; }
+  #reviewsCarousel .rc-viewport{ height:220px; padding:6px 44px; }
+  #reviewsCarousel .rc-card{ flex-basis:360px; }
+}
+</style>
+
+<script>
+/* ===== Robust JS: real scroll + infinite loop ===== */
+(function initReviewsCarousel(){
+  // load-safe
+  if (document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', initReviewsCarousel, {once:true});
+    return;
+  }
+  const root     = document.getElementById('reviewsCarousel');
+  if (!root || root.__rcInit) return; root.__rcInit = true;
+
+  const scroller = root.querySelector('.rc-scroller');
+  const prevBtn  = root.querySelector('.rc-prev');
+  const nextBtn  = root.querySelector('.rc-next');
+
+  // 1) בונים לופ: משכפלים את כל הקלפים פעם אחת לשני הצדדים
+  const originals = Array.from(scroller.children);
+  if (originals.length === 0) return;
+
+  const prepend = document.createDocumentFragment();
+  const append  = document.createDocumentFragment();
+  originals.forEach(el=> append.appendChild(el.cloneNode(true)));
+  originals.slice().reverse().forEach(el=> prepend.appendChild(el.cloneNode(true)));
+  scroller.insertBefore(prepend, scroller.firstChild);
+  scroller.appendChild(append);
+
+  // 2) חישוב צעד הגלילה (רוחב קלף + gap)
+  function cardStep(){
+    const card = scroller.querySelector('.rc-card');
+    const gap  = parseFloat(getComputedStyle(scroller).gap) || 0;
+    return (card ? card.offsetWidth : 420) + gap;
+  }
+
+  // 3) מציבים את הסקולר באמצע (אחרי ה-prepends)
+  function setToMiddle(noSmooth=true){
+    const step = cardStep();
+    scroller.scrollTo({left: originals.length * step, behavior: noSmooth ? 'auto' : 'instant'});
+  }
+
+  // 4) תיקון לופ: אם הגענו קרוב לקצוות – קופצים חזרה לאמצע בלי הבהוב
+  let scrolling = false, rafId = 0;
+  function onScroll(){
+    if (rafId) cancelAnimationFrame(rafId);
+    rafId = requestAnimationFrame(()=>{
+      const max   = scroller.scrollWidth;
+      const view  = scroller.clientWidth;
+      const left  = scroller.scrollLeft;
+      const step  = cardStep();
+      const start = step * 0.5;                                   // חצי צעד מהשמאלי
+      const end   = max - view - step * 0.5;                      // חצי צעד מהימני
+      if (left < start || left > end){
+        const idx = Math.round(left / step) % originals.length;   // אינדקס יחסי
+        scroller.scrollLeft = originals.length * step + idx * step; // קפיצה שקופה
+      }
+    });
+  }
+
+  // 5) חיצים – מזיזים צעד אחד בכל לחיצה
+  function scrollByStep(dir){
+    const step = cardStep();
+    scroller.scrollBy({left: dir * step, behavior:'smooth'});
+  }
+
+  // init
+  setToMiddle(true);
+  // אם תמונות נטענות מאוחר – נעדכן מיקום אחרי שהמידות מתייצבות
+  root.querySelectorAll('img').forEach(img=>{
+    if (!img.complete) img.addEventListener('load', ()=> setToMiddle(true), {once:true});
+  });
+  window.addEventListener('resize', ()=> setToMiddle(true));
+
+  // hook controls
+  scroller.addEventListener('scroll', onScroll);
+  nextBtn.addEventListener('click', ()=> scrollByStep(+1));
+  prevBtn.addEventListener('click', ()=> scrollByStep(-1));
+
+  // מחוות גרירה (נעים במובייל)
+  let startX=0, down=false;
+  scroller.addEventListener('pointerdown', e=>{
+    down=true; startX=e.clientX; scroller.setPointerCapture(e.pointerId);
+  });
+  scroller.addEventListener('pointerup', e=>{
+    if (!down) return; down=false;
+    const dx = e.clientX - startX;
+    if (dx < -30) scrollByStep(+1);
+    else if (dx > 30) scrollByStep(-1);
+  });
+})();
+</script>
+
+
 
 
 <main class="container">
@@ -171,37 +312,47 @@ document.addEventListener('DOMContentLoaded', () => {
 
             <label class="field">
                 <span>הערות נוספות</span>
-                <textarea id="notes" name="note" rows="4" placeholder="מה חשוב לך לציין?"></textarea>
+                <textarea id="notes" name="note" rows="4" placeholder="מה חשוב לך לציין?"></textarea>  font-family:'Heebo';
             </label>
+<!-- כפתור גדול – ברוחב מלא -->
+<button type="button" class="btn btn--primary"
+        style="color:#fff;
+               background:linear-gradient(135deg,#86d27a 0%,#5cc74e 52%,#48c738 100%);
+               box-shadow:0 18px 50px rgba(255,59,107,.36);
+               width:100%;
+               font-family:'Heebo';
+               margin-top:10px;"
+        onclick="sendWhatsApp()">
+  שליחת פרטים ב־WhatsApp
+</button>
 
-            <button class="btn btn--primary" style=" color: #fff;
-    background: linear-gradient(135deg, #addf8b 0%, #5cc74e 52%, #48c738 100%);
-    box-shadow: 0 18px 50px rgba(255, 59, 107, .36); width: 100%; font-family: 'Heebo';"submit" onclick="sendWhatsApp()">שליחת פרטים ב־WhatsApp</button>
-            <p class="tiny muted privacy">לעולם לא נמסור את הפרטים שלך לגורם אחר.</p>
-<button  onclick="window.open('https://wa.me/972542488427', '_blank')"  
-                style="background-color: #25D366; 
-                    color: white; 
-                    border: none; 
-                    padding: 12px 24px; 
-                    font-size: 16px; 
-                    border-radius: 8px;
-                    margin-top: 12px; 
-                    cursor: pointer;">
-        💬 להודעה כללית
-            </button>
+<p class="tiny muted privacy" style="margin:8px 0 0;">לעולם לא נמסור את הפרטים שלך לגורם אחר.</p>
+
+<!-- כפתור קטן – מיושר לשמאל -->
+<button type="button"
+        onclick="window.open('https://wa.me/972559950111','_blank')"
+        style="background-color:#5cc74e;
+               color:#fff;
+               border:none;
+               padding:12px 24px;
+               font-size:16px;
+               border-radius:8px;
+               margin-top:12px;
+               cursor:pointer;
+ font-family:'Heebo';
+              
+               display:block;
+               width:max-content;          
+               margin-inline-start:auto;">  <!-- דוחף לקצה שמאל -->
+  💬 להודעה בוואטסאפ
+</button>
+
 
             <div id="thanks" class="thanks" hidden>✅ תודה! קיבלנו את הפרטים ונחזור אליך ממש בקרוב.</div>
         </form>
     </section>
 </main>
       
-
-
-
-
-
-
-
 
 
 
@@ -248,7 +399,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // בניית ההודעה
         var lines = [
-        'היי איתי! אשמח להשאיר פרטים לחווית',
+        'היי איתי! אשמח להשאיר פרטים לאירוע מטורף 🎉',
         'שם: ' + name,
         'טלפון: ' + phone,
         'סוג אירוע: ' + eventType,
@@ -258,10 +409,8 @@ document.addEventListener('DOMContentLoaded', () => {
         ];
         var msg = lines.join('\n');
 
-        // מספר היעד ב־WhatsApp (בפורמט בינלאומי, ללא 0 בתחילת המספר המקומי)
         var target = '972559950111';
 
-        // פתיחת WhatsApp עם טקסט מוכן
         var waUrl = 'https://wa.me/' + target + '?text=' + encodeURIComponent(msg);
         window.open(waUrl, '_blank');
     }
