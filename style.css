@@ -673,8 +673,80 @@ button[type="submit"] {
 .social-btn.tiktok:hover{ color:#EE1D52; } /* דגש טיקטוק */
 .social-btn.ig:hover{ color:#ff4d8a; }    /* דגש אינסטגרם */
 
-/* רספונסיביות קטנה */
-@media (max-width:520px){
-  .social-btn{ width:40px; height:40px; border-radius:10px; }
-  .social-btn svg{ width:20px; height:20px; }
+/* ===== מובייל: ממרכזים את כפתורי ה-CTA והרשתות ===== */
+@media (max-width: 640px){
+  .cta-row{
+    justify-content: center;      /* ממקם למרכז */
+    gap: 10px;
+  }
+
+  /* שני הכפתורים – באמצע, לא פרוסים לרוחב מלא */
+  .cta-row > a.btn{
+    flex: 0 0 auto;
+    text-align: center;
+    min-width: 44%;               /* שניים-בצד-שניים, נראה מסודר */
+  }
+
+  /* מבטל את ה-flex-grow של ה-wrapper שהוספת פעם */
+  .cta-row > div[style*="flex-grow"]{
+    flex: 0 0 100% !important;    /* שובר שורה */
+    display: flex;
+    justify-content: center;      /* ממרכז את הרשתות */
+  }
+
+  /* קבוצת האייקונים – במרכז, בלי מרווח ימני */
+  .cta-social{
+    margin: 8px 0 0 0;
+    justify-content: center;
+  }
+}
+
+
+
+
+
+
+
+
+/* ===== NO-CROP RESET (applies to both old .review and new .rc-card) ===== */
+
+/* הקלף מרכז את התמונה ואינו מכריח גובה/רוחב */
+.reviews-wide .review,
+#reviewsCarousel .rc-card{
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+}
+
+/* מבטל כל מתיחה קודמת של תמונות שגרמה לחיתוך */
+.reviews-wide .review img,
+.reviews-wide img.review,
+.reviews-track .review img,
+#reviewsCarousel .rc-card img{
+  width: auto !important;
+  height: auto !important;
+  max-width: 100% !important;     /* לא עובר את רוחב הקלף */
+  max-height: 100% !important;    /* לא עובר את גובה הקלף */
+  object-fit: contain !important; /* כל התמונה בפנים, תמיד */
+  object-position: center center !important;
+  display: block !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+}
+
+/* מרווח בין קלפים = אפס, כדי שלא ייראה כאילו "נחתך" בקצוות */
+#reviewsCarousel .rc-scroller{ gap: 0 !important; }
+
+/* תן מספיק גובה לקלף כדי שהתמונה תישאר קריאה */
+#reviewsCarousel .rc-viewport{ height: 340px !important; }
+
+@media (max-width: 640px){
+  #reviewsCarousel .rc-viewport{
+    height: min(74vh, 380px) !important;   /* יותר מקום במובייל */
+    padding: 6px 40px !important;
+  }
+  #reviewsCarousel .rc-card{
+    flex-basis: 92vw !important;           /* קלף כמעט ברוחב המסך */
+  }
 }

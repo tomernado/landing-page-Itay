@@ -60,7 +60,7 @@
                 <div style="flex-grow:1">
            <div class="cta-social" aria-label="Social links">
     <a class="social-btn ig" href="https://www.instagram.com/itayitzhaki1?igsh=NmEzdHNiZ3lkdWs2" target="_blank" rel="noopener" aria-label="Instagram">
-      <!-- Instagram SVG -->
+
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3.5A5.5 5.5 0 1 1 6.5 13 5.51 5.51 0 0 1 12 7.5zm0 2A3.5 3.5 0 1 0 15.5 13 3.5 3.5 0 0 0 12 9.5zM18.5 6a1 1 0 1 1-1 1 1 1 0 0 1 1-1z"/>
       </svg>
@@ -271,6 +271,10 @@
 })();
 </script>
 
+<div id="rcLightbox" class="rc-lightbox" hidden>
+  <button class="rc-close" aria-label="סגור">×</button>
+  <img alt="">
+</div>
 
 
 
@@ -312,14 +316,14 @@
 
             <label class="field">
                 <span>הערות נוספות</span>
-                <textarea id="notes" name="note" rows="4" placeholder="מה חשוב לך לציין?"></textarea>  font-family:'Heebo';
+                <textarea id="notes" name="note" rows="4" placeholder="מה חשוב לך לציין?"></textarea> 
             </label>
 <!-- כפתור גדול – ברוחב מלא -->
 <button type="button" class="btn btn--primary"
         style="color:#fff;
                background:linear-gradient(135deg,#86d27a 0%,#5cc74e 52%,#48c738 100%);
                box-shadow:0 18px 50px rgba(255,59,107,.36);
-               width:100%;
+               width:90%;
                font-family:'Heebo';
                margin-top:10px;"
         onclick="sendWhatsApp()">
@@ -328,24 +332,23 @@
 
 <p class="tiny muted privacy" style="margin:8px 0 0;">לעולם לא נמסור את הפרטים שלך לגורם אחר.</p>
 
-<!-- כפתור קטן – מיושר לשמאל -->
 <button type="button"
         onclick="window.open('https://wa.me/972559950111','_blank')"
         style="background-color:#5cc74e;
                color:#fff;
                border:none;
-               padding:12px 24px;
-               font-size:16px;
+               padding:6px 15px;     
+               font-size:11px;       
                border-radius:8px;
                margin-top:12px;
                cursor:pointer;
- font-family:'Heebo';
-              
+               font-family:'Heebo';
                display:block;
-               width:max-content;          
-               margin-inline-start:auto;">  <!-- דוחף לקצה שמאל -->
+               width:max-content;
+               margin-inline-start:auto;">
   💬 להודעה בוואטסאפ
 </button>
+
 
 
             <div id="thanks" class="thanks" hidden>✅ תודה! קיבלנו את הפרטים ונחזור אליך ממש בקרוב.</div>
