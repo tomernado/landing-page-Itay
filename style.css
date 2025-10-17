@@ -785,3 +785,13 @@ img, video {
   .hero__pills + .hero__pills { margin-top: 6px; }
   .hero__pills + #reviewsCarousel{ margin-top: 6px; }
 }
+
+html, body{
+  width:100%;
+  overflow-x:hidden;     /* שלא יפתח זום בגלל גלילה לרוחב */
+}
+
+/* לנטרל דאבל-טאפ-זום על לחצנים וקישורים */
+a, button{
+  touch-action: manipulation;
+}
