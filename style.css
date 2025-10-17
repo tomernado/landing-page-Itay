@@ -740,3 +740,48 @@ button[type="submit"] {
   #reviewsCarousel .rc-scroller{ gap: 2px !important; }
   #reviewsCarousel .rc-nav{ width: 28px !important; height: 28px !important; font-size: 16px !important; }
 }
+
+/* prevent iOS auto-zoom on inputs */
+input, select, textarea {
+  font-size: 16px;
+}
+
+/* keep text scaling consistent */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* make images and sections responsive so שלא צריך זום */
+img, video {
+  max-width: 100%;
+  height: auto;
+}
+
+
+.hero{
+  overflow: visible;   /* שלא יחתוך את שורת ה-pills/צללים */
+}
+
+.hero__pills{
+  position: relative;
+  z-index: 3;          /* מעל שכבות רקע/meteors */
+}
+
+/* מרווח עדין בין 4 הצ'יפים לכותרת */
+.hero__pills + .hero__pills { margin-top: 8px; }
+
+/* הכותרת – קצת יותר מודגשת ומרוכזת */
+#reviewsLabel{
+  font-weight: 800;
+  padding: 10px 16px;
+}
+
+/* הצמד את הכותרת לקרוסלה */
+.hero__pills + #reviewsCarousel{ margin-top: 8px; }
+
+/* מובייל – עוד טיפת הידוק */
+@media (max-width:720px){
+  .hero__pills + .hero__pills { margin-top: 6px; }
+  .hero__pills + #reviewsCarousel{ margin-top: 6px; }
+}
