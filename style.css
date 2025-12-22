@@ -1,797 +1,537 @@
-/* ===================================================================
-   Itay Events — Premium Landing (Night Sky + Meteors)
-   Clean, readable CSS (no design changes from your last version)
-   =================================================================== */
+/* =========================================================
+   Itay Events — Clean, Readable CSS
+   (organized, no duplicates, RTL-ready)
+   ========================================================= */
 
 /* -------------------------------
-   Design Tokens
+   0) Design Tokens
 -------------------------------- */
-:root {
-  --brand:        #ff3b6b;
-  --brand-2:      #ff8cab;
-
-  --ink:          #101928;
-  --ink-soft:     #6b7280;
-
-  --bg:           #fff7f5;   /* light background (fallback) */
-  --card:         #ffffff;
-
-  --radius:       22px;
-
-  --shadow-lg:    0 28px 70px rgba(0, 0, 0, .13);
-  --shadow-md:    0 16px 40px rgba(0, 0, 0, .10);
-  --shadow-sm:    0 8px 18px  rgba(0, 0, 0, .06);
+:root{
+  --brand:#ff3b6b; --brand-2:#ff8cab;
+  --ink:#101928; --ink-soft:#6b7280;
+  --bg:#fff7f5; --card:#ffffff;
+  --radius:22px;
+  --shadow-lg:0 28px 70px rgba(0,0,0,.13);
+  --shadow-md:0 16px 40px rgba(0,0,0,.10);
+  --shadow-sm:0 8px 18px rgba(0,0,0,.06);
 
   /* Night palette */
-  --night:        #0b1020;
-  --night-2:      #0a1233;
-  --night-3:      #0a0f28;
+  --night:#0b1020; --night-2:#0a1233; --night-3:#0a0f28;
 
-  /* Form card on night */
-  --form-navy:    #121b3a;    /* slightly lighter than bg */
-  --form-navy-2:  #16224a;
+  /* Form (night) */
+  --form-navy:#121b3a; --form-navy-2:#16224a;
 
-  /* Radio label text */
-  --radio-text:   #0f1e3d;
+  /* Misc */
+  --radio-text:#0f1e3d;
+
+  /* Meteors */
+  --meteor-head:4px;   /* head size */
+  --meteor-line:1.6px; /* tail thickness */
+  --meteor-glow:6px;   /* glow power */
 }
 
 /* -------------------------------
-   Base
+   1) Base & Layout
 -------------------------------- */
-* {
-  box-sizing: border-box;
-}
-
-html, body {
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: "Heebo", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
-  color: var(--ink);
-  direction: rtl;
-  line-height: 1.65;
+*{ box-sizing:border-box; }
+html,body{ margin:0; padding:0; }
+html{ -webkit-text-size-adjust:100%; text-size-adjust:100%; }
+body{
+  font-family:"Heebo",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  color:var(--ink);
+  direction:rtl;
+  line-height:1.8;
   background:
     radial-gradient(1200px 520px at 85% -15%, #ffe3ea 0%, rgba(255,227,234,0) 70%),
     radial-gradient(1000px 460px at 10% -25%, #fff0f2 0%, rgba(255,240,242,0) 65%),
     var(--bg);
 }
+.container{ max-width:1060px; margin:0 auto; padding:0 20px; }
+img,video{ max-width:100%; height:auto; }
 
-.container {
-  max-width: 1060px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
+/* iOS: מונע זום על אינפוטים; ביטול דאבל-טאפ-זום על לינקים/כפתורים */
+input,select,textarea{ font-size:16px; }
+a,button{ touch-action:manipulation; }
 
 /* -------------------------------
-   HERO
+   2) Hero
 -------------------------------- */
-.hero {
-  position: relative;
-  padding: 64px 0 28px;
-  overflow: hidden;
+.hero{
+  position:relative;
+  padding:64px 0 28px;
+  overflow:visible;               /* שלא יחתוך pills/צללים */
 }
-
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: -25%;
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:-25%;
   background:
     radial-gradient(680px 280px at 70% 0%, rgba(255,141,169,.38), transparent 60%),
     radial-gradient(540px 240px at 30% -10%, rgba(255,59,107,.24), transparent 70%);
-  filter: blur(16px);
-  z-index: -1;
+  filter:blur(16px);
+  z-index:-1;
+}
+.hero__wrap{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:28px;
+  align-items:center;
+}
+.badge{
+  display:inline-block;
+  background:#fff;
+  border:1px solid #ffe0e4;
+  color:#b91c1c;
+  padding:8px 14px;
+  border-radius:999px;
+  font-weight:800;
+  box-shadow:var(--shadow-sm);
+}
+.hero h1{
+  margin:12px 0 6px;
+  font-size:clamp(24px,4.6vw,42px);
+
+  font-weight:800;
+}
+.hero .sub{
+  color:var(--ink-soft);
+  margin:0 0 14px;
+  font-weight:600;
 }
 
-.hero__wrap {
-  display: grid;
-  grid-template-columns: 1.1fr .9fr;
-  gap: 28px;
-  align-items: center;
+/* CTA row & buttons */
+.cta-row{ display:flex; gap:12px; flex-wrap:wrap; }
+.btn{
+  display:inline-block;
+  border:none;
+  text-decoration:none;
+  cursor:pointer;
+  font-weight:900;
+  border-radius:16px;
+  padding:14px 20px;
+  font-size:16px;
+  transition:transform .18s, box-shadow .18s, background .18s;
 }
-
-.badge {
-  display: inline-block;
-  background: #fff;
-  border: 1px solid #ffe0e4;
-  color: #b91c1c;
-  padding: 8px 14px;
-  border-radius: 999px;
-  font-weight: 800;
-  box-shadow: var(--shadow-sm);
+.btn--primary{
+  color:#fff;
+  background:linear-gradient(135deg,var(--brand) 0%,#fb7185 52%,var(--brand-2) 100%);
+  box-shadow:0 18px 50px rgba(255,59,107,.36);
 }
-
-.hero h1 {
-  margin: 12px 0 6px;
-  font-size: clamp(24px, 4.6vw, 44px);
-  font-weight: 800;
+.btn--primary:hover{ transform:translateY(-2px); box-shadow:0 22px 66px rgba(255,59,107,.46); }
+.btn--ghost{
+  color:var(--brand);
+  background:#fff;
+  border:1px solid #ffd1da;
+  box-shadow:var(--shadow-sm);
 }
+.btn--ghost:hover{ transform:translateY(-2px); }
 
-.hero .sub {
-  color: var(--ink-soft);
-  margin: 0 0 14px;
-  font-weight: 600;
+/* Portrait */
+.hero__portrait{
+  justify-self:center;
+  background:linear-gradient(180deg,#fff,#ffe7ec);
+  padding:10px;
+  border-radius:28px;
+  box-shadow:var(--shadow-md);
 }
-
-.cta-row {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.btn {
-  display: inline-block;
-  border: none;
-  text-decoration: none;
-  cursor: pointer;
-  font-weight: 900;
-  border-radius: 16px;
-  padding: 14px 20px;
-  font-size: 16px;
-  transition: transform .18s, box-shadow .18s, background .18s;
-}
-
-.btn--primary {
-  color: #fff;
-  background: linear-gradient(135deg, var(--brand) 0%, #fb7185 52%, var(--brand-2) 100%);
-  box-shadow: 0 18px 50px rgba(255, 59, 107, .36);
-}
-
-.btn--primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 22px 66px rgba(255, 59, 107, .46);
-}
-
-.btn--ghost {
-  color: var(--brand);
-  background: #fff;
-  border: 1px solid #ffd1da;
-  box-shadow: var(--shadow-sm);
-}
-
-.btn--ghost:hover {
-  transform: translateY(-2px);
-}
-
-.hero__portrait {
-  justify-self: center;
-  background: linear-gradient(180deg, #fff, #ffe7ec);
-  padding: 10px;
-  border-radius: 28px;
-  box-shadow: var(--shadow-md);
-}
-
-.hero__portrait img {
-  display: block;
-  width: min(380px, 88vw);
-  height: auto;
-  border-radius: 22px;
-}
-
-.hero__pills {
-  margin-top: 14px;
-}
-
-.pills {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.pills li {
-  background: #fff;
-  border: 1px solid #f3d3da;
-  color: #374151;
-  font-weight: 700;
-  padding: 8px 12px;
-  border-radius: 999px;
-  box-shadow: var(--shadow-sm);
+.hero__portrait img{
+  display:block;
+  width:min(380px,88vw);
+  height:auto;
+  border-radius:22px;
 }
 
 /* -------------------------------
-   FORM CARD (light by default)
+   3) Pills (chips) + Title chip
 -------------------------------- */
-.form-card {
-  margin: 28px 0 72px;
-  background: rgba(255,255,255,.85);
-  backdrop-filter: saturate(130%) blur(6px);
-  border-radius: var(--radius);
-  border: 1px solid rgba(255,59,107,.12);
-  box-shadow: var(--shadow-lg);
-  padding: 30px;
+.hero__pills{ margin-top:14px; position:relative; z-index:3; }
+.pills{
+  list-style:none;
+  margin:0;
+  padding:0;
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+.pills li{
+  background:#fff;
+  border:1px solid #f3d3da;
+  color:#374151;
+  font-weight:700;
+  padding:8px 12px;
+  border-radius:999px;
+  box-shadow:var(--shadow-sm);
+  margin:0;              
 }
 
-.form-card__head h2 {
-  margin: 0 0 6px;
-  font-size: 26px;
-  font-weight: 800;
+/* אם יש “כותרת” לעדויות בצ’יפ נפרד — שיהיה קרוב לקרוסלה */
+.hero__pills + .hero__pills{ margin-top:8px; }
+
+/* -------------------------------
+   4) Social square buttons (IG/TikTok)
+-------------------------------- */
+.cta-social{
+  display:flex;
+  gap:10px;
+  margin-inline-start:6px;
+}
+.social-btn{
+  width:44px; height:44px;
+  display:grid; place-items:center;
+  background:var(--card);
+  border-radius:12px;
+  box-shadow:var(--shadow-sm);
+  border:1px solid rgba(0,0,0,.06);
+  color:var(--ink);
+  text-decoration:none;
+  transition:transform .18s, box-shadow .18s, background .18s, color .18s;
+}
+.social-btn svg{ width:22px; height:22px; fill:currentColor; }
+.social-btn.ig{ color:#E1306C; }
+.social-btn.tiktok{ color:#111; }
+.social-btn:hover{ transform:translateY(-2px); box-shadow:var(--shadow-md); background:#fff; }
+.social-btn.tiktok:hover{ color:#EE1D52; }
+.social-btn.ig:hover{ color:#ff4d8a; }
+
+/* -------------------------------
+   5) Reviews Carousel (externalized)
+   (העבר את ה-<style> מתוך ה-HTML לקובץ הזה)
+-------------------------------- */
+#reviewsCarousel{
+  max-width:1060px;
+  margin:12px auto 0;             /* קרוב ל"עשרות המלצות חמות" */
+  padding:0 20px;
+  direction:rtl;
+}
+#reviewsCarousel .rc-viewport{
+  position:relative;
+  width:100%;
+  height:240px;
+  border-radius:18px;
+  padding:8px 52px;               /* מקום לחיצים */
+  background:rgba(20,26,56,.82);
+  border:1px solid rgba(255,255,255,.10);
+  box-shadow:0 18px 48px rgba(0,0,0,.55);
+  overflow:hidden;
+}
+#reviewsCarousel .rc-scroller{
+  display:flex;
+  align-items:center;
+  gap:4px;
+  height:100%;
+  overflow-x:auto;
+  overflow-y:hidden;
+  scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;
+  direction:ltr;                   /* יציב ב-RTL */
+}
+#reviewsCarousel .rc-scroller::-webkit-scrollbar{ display:none; }
+
+#reviewsCarousel .rc-card{
+  flex:0 0 420px;
+  height:100%;
+  scroll-snap-align:center;
+  border-radius:16px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.10);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.03), 0 10px 26px rgba(0,0,0,.45);
+  overflow:hidden;
+}
+#reviewsCarousel .rc-card img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  padding:6px;
+  display:block;
+  border-radius:12px;
 }
 
-.muted {
-  color: var(--ink-soft);
+/* Nav arrows */
+#reviewsCarousel .rc-nav{
+  position:absolute; top:50%; transform:translateY(-50%);
+  width:38px; height:38px; border-radius:50%;
+  border:1px solid rgba(255,255,255,.18);
+  background:rgba(255,255,255,.14);
+  color:#fff; font-size:20px; display:grid; place-items:center;
+  cursor:pointer; backdrop-filter:blur(6px);
+  transition:transform .15s, background .15s, opacity .2s;
+  z-index:10; pointer-events:auto;
 }
+#reviewsCarousel .rc-nav:hover{ transform:translateY(-50%) scale(1.08); background:rgba(255,255,255,.22); }
+#reviewsCarousel .rc-prev{ right:10px; }
+#reviewsCarousel .rc-next{ left:10px; }
 
-/* Fields */
-.grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-
-.field {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin: 10px 0;
-}
-
-.field span {
-  font-weight: 800;
-}
-
-input[type="text"],
-input[type="tel"],
-input[type="email"],
-textarea {
-  width: 100%;
-  padding: 14px 16px;
-  border-radius: 14px;
-  border: 1px solid #e5e7eb;
-  background: #fff;
-  font-size: 16px;
-  box-shadow: var(--shadow-sm);
-  transition: border-color .15s, box-shadow .15s, background .15s;
-}
-
-textarea {
-  min-height: 120px;
-  resize: vertical;
-}
-
-input:focus,
-textarea:focus {
-  outline: none;
-  border-color: #ff9eb0;
-  box-shadow: 0 0 0 4px rgba(255,157,176,.22);
-}
-
-/* Options (radio) */
-.options {
-  border: none;
-  padding: 0;
-  margin: 16px 0 6px;
-}
-
-.options legend {
-  font-weight: 900;
-  margin-bottom: 8px;
-}
-
-.options label {
-  display: inline-flex;
-  gap: 8px;
-  align-items: center;
-  background: #fff;
-  border: 1px solid #f1f5f9;
-  border-radius: 12px;
-  padding: 8px 12px;
-  margin: 6px 8px 0 0;
-  box-shadow: var(--shadow-sm);
-  cursor: pointer;
-  transition: transform .12s, box-shadow .12s;
-
-  /* ביקשת: טקסט כחול כהה בתוך הכפתור הלבן */
-  color: var(--radio-text);
-}
-
-.options input[type="radio"] {
-  accent-color: var(--brand);
-  transform: scale(1.05);
-}
-
-.options label:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 10px 22px rgba(0, 0, 0, .08);
-}
-
-/* Submit + notes */
-button[type="submit"] {
-  width: 100%;
-  margin-top: 10px;
-}
-
-.tiny {
-  font-size: 12px;
-}
-
-.privacy {
-  margin-top: 6px;
-}
-
-.thanks {
-  text-align: center;
-  margin-top: 14px;
-  font-weight: 900;
-  color: #16a34a;
+/* Mobile tuning for carousel */
+@media (max-width:640px){
+  #reviewsCarousel{ padding:0 10px; }
+  #reviewsCarousel .rc-viewport{ height:auto; padding:6px 44px; }
+  #reviewsCarousel .rc-scroller{ gap:2px; }
+  #reviewsCarousel .rc-card{
+    flex:0 0 82vw;
+    height:auto;
+    max-height:200px;
+    display:flex; align-items:center; justify-content:center;
+    overflow:hidden;
+  }
+  #reviewsCarousel .rc-card img{
+    width:auto; height:auto;
+    max-width:100%; max-height:100%;
+    object-fit:contain; padding:0; border-radius:0;
+  }
+  #reviewsCarousel .rc-nav{ width:28px; height:28px; font-size:16px; }
 }
 
 /* -------------------------------
-   Footer
+   6) Form Card
 -------------------------------- */
-.footer {
-  text-align: center;
-  color: var(--ink-soft);
-  padding: 22px 12px 38px;
+.form-card{
+  margin:28px 0 72px;
+  background:rgba(255,255,255,.85);
+  backdrop-filter:saturate(130%) blur(6px);
+  border-radius:var(--radius);
+  border:1px solid rgba(255,59,107,.12);
+  box-shadow:var(--shadow-lg);
+  padding:30px;
+}
+.form-card__head h2{ margin:0 0 6px; font-size:26px; font-weight:800; }
+.muted{ color:var(--ink-soft); }
+
+.grid{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.field{ display:flex; flex-direction:column; gap:8px; margin:10px 0; }
+.field span{ font-weight:800; }
+
+input[type="text"], input[type="tel"], input[type="email"], textarea{
+  width:100%;
+  padding:14px 16px;
+  border-radius:14px;
+  border:1px solid #e5e7eb;
+  background:#fff;
+  font-size:16px;
+  box-shadow:var(--shadow-sm);
+  transition:border-color .15s, box-shadow .15s, background .15s;
+}
+textarea{ min-height:120px; resize:vertical; }
+input:focus, textarea:focus{
+  outline:none;
+  border-color:#ff9eb0;
+  box-shadow:0 0 0 4px rgba(255,157,176,.22);
+}
+
+/* Radio options (white pills) */
+.options{ border:none; padding:0; margin:16px 0 6px; }
+.options legend{ font-weight:900; margin-bottom:8px; }
+.options label{
+  display:inline-flex; gap:8px; align-items:center;
+  background:#fff; color:var(--radio-text);
+  border:1px solid #f1f5f9; border-radius:12px;
+  padding:8px 12px; margin:6px 8px 0 0;
+  box-shadow:var(--shadow-sm);
+  cursor:pointer;
+  transition:transform .12s, box-shadow .12s;
+}
+.options label:hover{ transform:translateY(-1px); box-shadow:0 10px 22px rgba(0,0,0,.08); }
+.options input[type="radio"]{ accent-color:var(--brand); transform:scale(1.05); }
+
+.tiny{ font-size:12px; }
+.privacy{ margin-top:6px; }
+.thanks{ text-align:center; margin-top:14px; font-weight:900; color:#16a34a; }
+
+/* -------------------------------
+   7) Footer
+-------------------------------- */
+.footer{
+  text-align:center;
+  color:var(--ink-soft);
+  padding:22px 12px 38px;
 }
 
 /* -------------------------------
-   Animations & Responsive
+   8) Night Theme
 -------------------------------- */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(8px); }
-  to   { opacity: 1; transform: translateY(0); }
+.theme-night{
+  color:#eef2ff;
+  background:var(--night);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
 }
-
-.hero__wrap,
-.form-card,
-.hero__pills {
-  animation: fadeUp .5s ease both;
-}
-
-@media (max-width: 980px) {
-  .hero__wrap { grid-template-columns: 1fr; text-align: center; }
-  .hero__portrait { order: 2; }
-  .hero__copy { order: 1; }
-}
-
-@media (max-width: 720px) {
-  .form-card { padding: 22px; }
-  .grid { grid-template-columns: 1fr; }
-}
-
-/* ===================================================================
-   NIGHT THEME  (apply with <body class="theme-night">)
-   – Sky, denser stars, visible meteors, form card deep navy
-   =================================================================== */
-.theme-night {
-  color: #eef2ff;
-  background: var(--night);
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-}
-
 /* Deep sky + gentle brand glow */
-.theme-night::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -3;
-  pointer-events: none;
+.theme-night::before{
+  content:"";
+  position:fixed; inset:0; z-index:-3; pointer-events:none;
   background:
     radial-gradient(1400px 620px at 80% -10%, rgba(255,59,107,.16), transparent 60%),
     radial-gradient(1200px 560px at 20% -20%, rgba(255,140,171,.12), transparent 67%),
     linear-gradient(180deg, var(--night) 0%, var(--night-2) 55%, var(--night-3) 100%);
 }
-
-
-
-@keyframes twinkle {
-  0%   { opacity: .8;  filter: brightness(1);    }
-  100% { opacity: 1;   filter: brightness(1.15); }
-}
-
-/* Typography polish on night */
-.theme-night .hero h1 { color: #fff; letter-spacing: .3px; text-shadow: 0 8px 36px rgba(255,255,255,.08); }
-.theme-night .hero .sub { color: #c7cbe6; }
-.theme-night .badge { background: rgba(255,255,255,.08); color: #fff; border-color: rgba(255,255,255,.18); }
-.theme-night .pills li { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.14); color: #e5e7f7; }
-.theme-night .hero__portrait { background: linear-gradient(180deg, #11152a, #1a2040); box-shadow: 0 18px 50px rgba(0,0,0,.45); }
-.theme-night .btn--primary { box-shadow: 0 22px 66px rgba(255,59,107,.45); }
-.theme-night .btn--ghost { color: #ffe1ea; background: rgba(255,255,255,.10); border-color: rgba(255,255,255,.22); }
-.theme-night button[onclick*="wa.me"] { color: #0a0f1f; font-weight: 800; }  /* WhatsApp button text */
-
-/* Form card — deep navy with separation from bg */
-.theme-night .form-card {
-  background: linear-gradient(180deg, var(--form-navy), var(--form-navy-2));
-  border: 1px solid rgba(255,255,255,.08);
-  box-shadow: 0 28px 80px rgba(0,0,0,.55);
-  color: #e9ecff;
-}
-
-.theme-night .form-card__head h2 { color: #ffffff; }
-.theme-night .form-card .muted   { color: #b6bcdc; }
-
-/* Inputs on dark card */
-.theme-night .form-card input[type="text"],
-.theme-night .form-card input[type="tel"],
-.theme-night .form-card input[type="email"],
-.theme-night .form-card textarea {
-  background: #10152f;
-  color: #f1f4ff;
-  border-color: #2a335d;
-  font-weight: 600;
-}
-
-.theme-night .form-card input:focus,
-.theme-night .form-card textarea:focus {
-  border-color: #ff9eb0;
-  box-shadow: 0 0 0 4px rgba(255,157,176,.22);
-}
-
-/* Radio options — white pills with deep-blue text (visible) */
-.theme-night .form-card .options label {
-  background: #ffffff;
-  color: var(--radio-text);
-  border-color: #e6e9f2;
-}
-
-.theme-night .form-card .options input[type="radio"] {
-  accent-color: var(--brand);
-}
-
-
+/* Dense star field */
 .theme-night::after{
   content:"";
-  position:fixed;
-  inset:0;
-  z-index:-2;
-  pointer-events:none;
-  opacity:.98;
-
-  /* הרבה שכבות עם אריחים קטנים יותר לצפיפות גבוהה */
+  position:fixed; inset:0; z-index:-2; pointer-events:none; opacity:.98;
   background-image:
-    radial-gradient(2px 2px   at  7%  9%,  rgba(255,255,255,.95) 40%, transparent 41%),
+    radial-gradient(2px 2px at 7% 9%, rgba(255,255,255,.95) 40%, transparent 41%),
     radial-gradient(1.8px 1.8px at 18% 22%, rgba(255,255,255,.90) 40%, transparent 41%),
     radial-gradient(1.6px 1.6px at 30% 15%, rgba(255,255,255,.85) 40%, transparent 41%),
     radial-gradient(1.4px 1.4px at 43% 28%, rgba(255,255,255,.80) 40%, transparent 41%),
     radial-gradient(1.2px 1.2px at 52% 12%, rgba(255,255,255,.80) 40%, transparent 41%),
-    radial-gradient(1px 1px     at 63% 24%, rgba(255,255,255,.75) 40%, transparent 41%),
+    radial-gradient(1px 1px at 63% 24%, rgba(255,255,255,.75) 40%, transparent 41%),
     radial-gradient(0.9px 0.9px at 75% 18%, rgba(255,255,255,.72) 40%, transparent 41%),
     radial-gradient(1.2px 1.2px at 88% 26%, rgba(255,255,255,.78) 40%, transparent 41%),
-
-    radial-gradient(2px 2px     at 12% 64%, rgba(255,255,255,.95) 40%, transparent 41%),
+    radial-gradient(2px 2px at 12% 64%, rgba(255,255,255,.95) 40%, transparent 41%),
     radial-gradient(1.6px 1.6px at 24% 72%, rgba(255,255,255,.85) 40%, transparent 41%),
     radial-gradient(1.3px 1.3px at 36% 66%, rgba(255,255,255,.82) 40%, transparent 41%),
-    radial-gradient(1px 1px     at 49% 78%, rgba(255,255,255,.76) 40%, transparent 41%),
+    radial-gradient(1px 1px at 49% 78%, rgba(255,255,255,.76) 40%, transparent 41%),
     radial-gradient(0.9px 0.9px at 58% 60%, rgba(255,255,255,.70) 40%, transparent 41%),
     radial-gradient(1.2px 1.2px at 70% 73%, rgba(255,255,255,.78) 40%, transparent 41%),
-    radial-gradient(1px 1px     at 82% 67%, rgba(255,255,255,.74) 40%, transparent 41%),
+    radial-gradient(1px 1px at 82% 67%, rgba(255,255,255,.74) 40%, transparent 41%),
     radial-gradient(0.9px 0.9px at 93% 79%, rgba(255,255,255,.70) 40%, transparent 41%),
-
-    /* “אבק” עדין של כוכבים מאוד קטנים */
     radial-gradient(0.7px 0.7px at 10% 40%, rgba(255,255,255,.65) 40%, transparent 41%),
     radial-gradient(0.6px 0.6px at 33% 52%, rgba(255,255,255,.60) 40%, transparent 41%),
     radial-gradient(0.6px 0.6px at 61% 34%, rgba(255,255,255,.62) 40%, transparent 41%),
     radial-gradient(0.6px 0.6px at 84% 46%, rgba(255,255,255,.60) 40%, transparent 41%);
-
-  /* אריחים קטנים יותר = צפיפות גדולה יותר */
   background-size:
     240px 240px, 220px 220px, 200px 200px, 200px 200px, 180px 180px, 180px 180px, 160px 160px, 160px 160px,
     240px 240px, 220px 220px, 200px 200px, 200px 200px, 180px 180px, 180px 180px, 160px 160px, 160px 160px,
     140px 140px, 140px 140px, 140px 140px, 140px 140px;
-
-  background-repeat: repeat;
-
-  /* הבהוב עדין מאוד */
-  animation: twinkle-boost 7s ease-in-out infinite alternate;
+  background-repeat:repeat;
+  animation:twinkle-boost 7s ease-in-out infinite alternate;
 }
-
-/* הבהוב מעט מודגש יותר אך נקי */
 @keyframes twinkle-boost{
-  0%   { opacity:.85; filter:brightness(1);    }
-  100% { opacity:1;   filter:brightness(1.18); }
+  0%{ opacity:.85; filter:brightness(1); }
+  100%{ opacity:1; filter:brightness(1.18); }
 }
 
-/* =========================================================
-   Subtle Falling Meteors (heads + short tails)
-   ========================================================= */
+/* Night: text & components polish */
+.theme-night .hero h1{ color:#fff; letter-spacing:.3px; text-shadow:0 8px 36px rgba(255,255,255,.08); }
+.theme-night .hero .sub{ color:#c7cbe6; }
+.theme-night .badge{ background:rgba(255,255,255,.08); color:#fff; border-color:rgba(255,255,255,.18); }
+.theme-night .pills li{ background:rgba(255,255,255,.06); border-color:rgba(255,255,255,.14); color:#e5e7f7; }
+.theme-night .hero__portrait{ background:linear-gradient(180deg,#11152a,#1a2040); box-shadow:0 18px 50px rgba(0,0,0,.45); }
+.theme-night .btn--primary{ box-shadow:0 22px 66px rgba(255,59,107,.45); }
+.theme-night .btn--ghost{ color:#ffe1ea; background:rgba(255,255,255,.10); border-color:rgba(255,255,255,.22); }
+
+/* Night form card */
+.theme-night .form-card{
+  background:linear-gradient(180deg,var(--form-navy),var(--form-navy-2));
+  border:1px solid rgba(255,255,255,.08);
+  box-shadow:0 28px 80px rgba(0,0,0,.55);
+  color:#e9ecff;
+}
+.theme-night .form-card__head h2{ color:#fff; }
+.theme-night .form-card .muted{ color:#b6bcdc; }
+.theme-night .form-card input[type="text"],
+.theme-night .form-card input[type="tel"],
+.theme-night .form-card input[type="email"],
+.theme-night .form-card textarea{
+  background:#10152f; color:#f1f4ff; border-color:#2a335d; font-weight:600;
+}
+.theme-night .form-card input:focus,
+.theme-night .form-card textarea:focus{
+  border-color:#ff9eb0; box-shadow:0 0 0 4px rgba(255,157,176,.22);
+}
+.theme-night .form-card .options label{ background:#fff; color:var(--radio-text); border-color:#e6e9f2; }
+
+/* -------------------------------
+   9) Meteors (single, consolidated version)
+-------------------------------- */
 .meteors{
-  position:fixed;
-  inset:0;
-  z-index:-1;                 /* מעל הכוכבים, מתחת לתוכן */
-  pointer-events:none;
-  overflow:hidden;
+  position:fixed; inset:0; z-index:-1; pointer-events:none; overflow:hidden;
 }
-
-/* מטאור יחיד */
 .meteor{
   position:absolute;
   left:var(--x,50%);
   top:var(--y,-15%);
-  width:2px;                  /* רוחב הזנב */
-  height:110px;               /* אורך הזנב */
+  width:var(--meteor-line);
+  height:110px;
   transform:rotate(-32deg);
   opacity:0;
   animation:meteor-move var(--dur,8s) linear infinite;
   animation-delay:var(--delay,0s);
 }
-
-/* ראש מבריק (“כדור”) */
+/* head (front) */
 .meteor::before{
   content:"";
   position:absolute;
-  top:60%;
-  left:50%;
-  width:7px; height:7px;
-  transform:translate(-50%,-50%);
+  bottom:-1px; left:50%;
+  width:var(--meteor-head); height:var(--meteor-head);
+  transform:translateX(-50%);
   border-radius:50%;
   background:#fff;
-  filter:drop-shadow(0 0 12px rgba(255,255,255,.9))
-         drop-shadow(0 0 22px rgba(255,255,255,.7));
+  filter:drop-shadow(0 0 calc(var(--meteor-glow)*0.7) rgba(255,255,255,.85))
+         drop-shadow(0 0 calc(var(--meteor-glow)*1.4) rgba(255,255,255,.45));
 }
-
-/* זנב מטושטש ומצטמצם, מתמוסס לסוף */
+/* tail */
 .meteor::after{
   content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(to bottom,
-              rgba(255,255,255,0) 0%,
-              rgba(255,255,255,.9) 58%,
-              rgba(255,255,255,0) 100%);
-  filter:blur(.35px) drop-shadow(0 0 6px rgba(255,255,255,.75));
-  /* מצמצם לקראת הסוף כדי שלא ייראה “קו” ישר */
-  mask-image:linear-gradient(to bottom, black 0%, black 58%, transparent 100%);
+  position:absolute; top:0; bottom:8px; left:0; right:0;
+  background:linear-gradient(to top, rgba(255,255,255,.9) 0%, rgba(255,255,255,.35) 40%, rgba(255,255,255,0) 100%);
+  filter:blur(.35px) drop-shadow(0 0 6px rgba(255,255,255,.65));
+  mask-image:linear-gradient(to top, black 0%, black 52%, transparent 100%);
 }
-
-/* תנועה אלכסונית עם דעיכה עדינה + “וויבול” קטן כדי להרגיש טבעי */
 @keyframes meteor-move{
-  0%   { opacity:0; transform:translate3d(0,0,0) rotate(-32deg) }
-  8%   { opacity:1 }
-  35%  { transform:translate3d(18vw, 18vh, 0) rotate(-32deg) }
-  48%  { transform:translate3d(30vw, 31vh, 0) rotate(-33deg) }
-  60%  { opacity:.25; transform:translate3d(40vw, 42vh, 0) rotate(-33deg) }
-  70%  { opacity:0 }
-  100% { opacity:0; transform:translate3d(42vw, 46vh, 0) rotate(-33deg) }
+  0%{ opacity:0; transform:translate3d(0,0,0) rotate(-32deg) }
+  8%{ opacity:1 }
+  35%{ transform:translate3d(18vw,18vh,0) rotate(-32deg) }
+  48%{ transform:translate3d(30vw,31vh,0) rotate(-33deg) }
+  60%{ opacity:.25; transform:translate3d(40vw,42vh,0) rotate(-33deg) }
+  70%{ opacity:0 }
+  100%{ opacity:0; transform:translate3d(42vw,46vh,0) rotate(-33deg) }
 }
+@media (max-width:640px){ .meteor{ height:80px } }
+@media (prefers-reduced-motion:reduce){ .meteor{ animation:none; opacity:0 } }
 
-/* עדין יותר בניידים */
-@media (max-width:640px){
-  .meteor{ height:80px }
+/* -------------------------------
+   10) Fade-in (used by hero/form)
+-------------------------------- */
+@keyframes fadeUp{ from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:translateY(0)} }
+.hero__wrap, .form-card, .hero__pills{ animation:fadeUp .5s ease both; }
+
+/* -------------------------------
+   11) Responsive
+-------------------------------- */
+@media (max-width:980px){
+  .hero__wrap{ grid-template-columns:1fr; text-align:center; }
+  .hero__portrait{ order:2; }
+  .hero__copy{ order:1; }
 }
-
-/* נגישות – מכבה אם המשתמש ביקש להפחית אנימציות */
-@media (prefers-reduced-motion: reduce){
-  .meteor{ animation:none; opacity:0 }
-}
-/* ===== Meteor head at the front (end of the line) ===== */
-.meteor{
-  /* אין שינוי לתנועה/גובה/זווית */
-}
-
-.meteor::before{
-  /* הראש (העיגול) נמצא בקצה התחתון — כלומר בקדמת התנועה */
-  top: auto;
-  bottom: -2px;              /* מעט מעבר לקצה כדי שלא ייחתך */
-  left: 50%;
-  width: 8px;
-  height: 8px;
-  transform: translateX(-50%);
-  border-radius: 50%;
-  background: #fff;
-  filter: drop-shadow(0 0 12px rgba(255,255,255,.9))
-          drop-shadow(0 0 22px rgba(255,255,255,.7));
-}
-
-.meteor::after{
-  /* הזנב יוצא מהראש כלפי מעלה (לאורך הרוטציה) ומתעמעם */
-  top: 0;
-  bottom: 8px;               /* מפנה מקום לראש */
-  left: 0;
-  right: 0;
-  background: linear-gradient(to top,
-                rgba(255,255,255,.9) 0%,
-                rgba(255,255,255,.35) 45%,
-                rgba(255,255,255,0) 100%);
-  filter: blur(.35px) drop-shadow(0 0 6px rgba(255,255,255,.65));
-  /* מצמצם את סוף הזנב כדי שלא ייראה כמו קו ישר */
-  mask-image: linear-gradient(to top, black 0%, black 55%, transparent 100%);
-}
-
-/* ===== Meteor head smaller & attached to tail ===== */
-:root{
-  /* שליטה נוחה על הגודל/עובי */
-  --meteor-head: 4px;     /* קוטר העיגול (הראש) */
-  --meteor-line: 1.6px;   /* עובי הקו (הזנב) */
-  --meteor-glow: 6px;     /* עוצמת הזוהר סביב הראש */
-}
-
-/* הקו הדק של המטאור */
-.meteor{
-  width: var(--meteor-line);
-}
-
-/* ראש קטן וצמוד לקצה */
-.meteor::before{
-  width: var(--meteor-head);
-  height: var(--meteor-head);
-  bottom: -1px;                  /* ממש על הקצה של הקו */
-  left: 50%;
-  transform: translateX(-50%);
-  background: #fff;
-  border-radius: 50%;
-  /* זוהר עדין יותר כדי שלא יראה "כדור" גדול */
-  filter: drop-shadow(0 0 calc(var(--meteor-glow)*0.7) rgba(255,255,255,.85))
-          drop-shadow(0 0 calc(var(--meteor-glow)*1.4) rgba(255,255,255,.45));
-}
-
-/* זנב דק שמתחבר יפה לראש */
-.meteor::after{
-  background: linear-gradient(to top,
-              rgba(255,255,255,.9) 0%,
-              rgba(255,255,255,.35) 40%,
-              rgba(255,255,255,0) 100%);
-  mask-image: linear-gradient(to top, black 0%, black 52%, transparent 100%);
-}
-
-/* במסכים קטנים – עוד טיפה הקטנה, נראה טבעי יותר */
-@media (max-width: 640px){
-  :root{
-    --meteor-head: 3.2px;
-    --meteor-line: 1.4px;
-    --meteor-glow: 5px;
-  }
-}
-
-
-/* קבוצת הריבועים של הרשתות – תופיע ממש ליד הכפתורים */
-.cta-social{
-  display:flex; gap:10px;
-  /* בממשק RTL זה יישב “ליד”. אם צריך טיפה רווח מהכפתורים: */
-  margin-inline-start:6px;
-}
-
-/* כפתור ריבוע */
-.social-btn{
-  width:44px; height:44px; display:grid; place-items:center;
-  background:var(--card); border-radius:12px;
-  box-shadow:var(--shadow-sm);
-  border:1px solid rgba(0,0,0,.06);
-  transition:transform .18s ease, box-shadow .18s ease, background .18s ease, color .18s ease;
-  color:var(--ink);
-  text-decoration:none;
-}
-
-/* אייקון */
-.social-btn svg{
-  width:22px; height:22px; fill:currentColor;
-}
-
-/* צבעי מותג קלים + הובר */
-.social-btn.ig{ color:#E1306C; }
-.social-btn.tiktok{ color:#111; }
-.social-btn:hover{
-  transform:translateY(-2px);
-  box-shadow:var(--shadow-md);
-  background:#fff;
-}
-.social-btn.tiktok:hover{ color:#EE1D52; } /* דגש טיקטוק */
-.social-btn.ig:hover{ color:#ff4d8a; }    /* דגש אינסטגרם */
-
-/* ===== מובייל: ממרכזים את כפתורי ה-CTA והרשתות ===== */
-@media (max-width: 640px){
-  .cta-row{
-    justify-content: center;      /* ממקם למרכז */
-    gap: 10px;
-  }
-
-  /* שני הכפתורים – באמצע, לא פרוסים לרוחב מלא */
-  .cta-row > a.btn{
-    flex: 0 0 auto;
-    text-align: center;
-    min-width: 44%;               /* שניים-בצד-שניים, נראה מסודר */
-  }
-
-  /* מבטל את ה-flex-grow של ה-wrapper שהוספת פעם */
-  .cta-row > div[style*="flex-grow"]{
-    flex: 0 0 100% !important;    /* שובר שורה */
-    display: flex;
-    justify-content: center;      /* ממרכז את הרשתות */
-  }
-
-  /* קבוצת האייקונים – במרכז, בלי מרווח ימני */
-  .cta-social{
-    margin: 8px 0 0 0;
-    justify-content: center;
-  }
-}
-
-
-
-
-
-/* ===== Mobile fix: קטן, וללא חיתוך ===== */
-@media (max-width: 640px){
-  /* אל תכריחו גובה לקונטיינר */
-  #reviewsCarousel .rc-viewport{
-    height: auto !important;
-    padding: 6px 36px !important;     /* קצת מקום לחיצים */
-  }
-
-  /* הקלפים קטנים יותר, גובה לפי תוכן ועד מקסימום */
-  #reviewsCarousel .rc-card{
-    flex: 0 0 82vw !important;        /* רוחב הקלף (אפשר 78–86vw) */
-    height: auto !important;
-    max-height: 200px !important;     /* ↓ הקטנה אמיתית במובייל */
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    overflow: hidden !important;
-  }
-
-  /* התמונה תמיד נכנסת בשלמותה – בלי חיתוך */
-  #reviewsCarousel .rc-card img{
-    width: auto !important;
-    height: auto !important;
-    max-width: 100% !important;
-    max-height: 100% !important;
-    object-fit: contain !important;   /* letterbox */
-    display: block !important;
-    padding: 0 !important;
-    border-radius: 0 !important;
-  }
-
-  /* רווחים וחיצים קטנים יותר */
-  #reviewsCarousel .rc-scroller{ gap: 2px !important; }
-  #reviewsCarousel .rc-nav{ width: 28px !important; height: 28px !important; font-size: 16px !important; }
-}
-
-/* prevent iOS auto-zoom on inputs */
-input, select, textarea {
-  font-size: 16px;
-}
-
-/* keep text scaling consistent */
-html {
-  -webkit-text-size-adjust: 100%;
-  text-size-adjust: 100%;
-}
-
-/* make images and sections responsive so שלא צריך זום */
-img, video {
-  max-width: 100%;
-  height: auto;
-}
-
-
-.hero{
-  overflow: visible;   /* שלא יחתוך את שורת ה-pills/צללים */
-}
-
-.hero__pills{
-  position: relative;
-  z-index: 3;          /* מעל שכבות רקע/meteors */
-}
-
-/* מרווח עדין בין 4 הצ'יפים לכותרת */
-.hero__pills + .hero__pills { margin-top: 8px; }
-
-/* הכותרת – קצת יותר מודגשת ומרוכזת */
-#reviewsLabel{
-  font-weight: 800;
-  padding: 10px 16px;
-}
-
-/* הצמד את הכותרת לקרוסלה */
-.hero__pills + #reviewsCarousel{ margin-top: 8px; }
-
-/* מובייל – עוד טיפת הידוק */
 @media (max-width:720px){
-  .hero__pills + .hero__pills { margin-top: 6px; }
-  .hero__pills + #reviewsCarousel{ margin-top: 6px; }
+  .form-card{ padding:22px; }
+  .grid{ grid-template-columns:1fr; }
+  /* מרכז CTA + רשתות */
+  .cta-row{ justify-content:center; gap:10px; }
+  .cta-row > a.btn{ flex:0 0 auto; min-width:44%; text-align:center; }
+  .cta-row > div[style*="flex-grow"]{
+    flex:0 0 100% !important;
+    display:flex; justify-content:center;
+  }
+  .cta-social{ margin:8px 0 0 0; justify-content:center; }
 }
 
+
+/* ===== Lock page from horizontal panning ===== */
 html, body{
-  width:100%;
-  overflow-x:hidden;     /* שלא יפתח זום בגלל גלילה לרוחב */
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;           /* אין scroll אופקי לעמוד */
+  overscroll-behavior-x: none;  /* Chrome/Android: אל תעביר 'משיכת-צד' לרמה העליונה */
+  touch-action: pan-y;          /* ברירת מחדל: רק גלילה אנכית בעמוד */
 }
 
-/* לנטרל דאבל-טאפ-זום על לחצנים וקישורים */
-a, button{
-  touch-action: manipulation;
+/* הקרוסלה עצמה כן מקבלת גלילה אופקית */
+#reviewsCarousel .rc-scroller{
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x;          /* מותר משיכת-צד רק כאן */
 }
+
+/* לוודא ששכבות רקע/meteors לא “מרחיבות” את המסך */
+.meteors,
+.theme-night::before,
+.theme-night::after{
+  left: 0; right: 0;
+  width: 100%;
+}
+
+/* לעתים חריגות: קלפים + חיצים – לא לתת להם להוציא רוחב */
+#reviewsCarousel .rc-viewport{ overflow: hidden; }
+
