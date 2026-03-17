@@ -84,7 +84,7 @@ export default function Hero() {
 
       {/* ── Hero content ── */}
       <motion.div
-        style={{ y: contentY, opacity: contentOpacity, minHeight: '100svh', paddingTop: '100px', paddingBottom: '40px' }}
+        style={{ y: contentY, opacity: contentOpacity, minHeight: '100svh', paddingTop: '60px', paddingBottom: '40px' }}
         className="relative z-10 flex flex-col items-center justify-center text-center px-6"
       >
         {/* Badge */}
@@ -298,7 +298,7 @@ export default function Hero() {
           className="overflow-hidden"
           style={{ maskImage: 'linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%)' }}
         >
-          <div className="marquee-inner flex gap-4 w-max">
+          <div className="marquee-inner flex w-max" style={{ gap: 0 }}>
             {[
               { icon: '🎤', text: 'הנחייה מגבשת וייחודית' },
               { icon: '🎧', text: 'דיג׳י כלול בחבילה' },
@@ -319,7 +319,7 @@ export default function Hero() {
             ].map((p, i) => (
               <span key={i}
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold flex-shrink-0"
-                style={{ background: 'rgba(255,255,255,.07)', border: '1px solid rgba(255,255,255,.08)', color: '#94a3b8' }}
+                style={{ background: 'rgba(255,255,255,.07)', border: '1px solid rgba(255,255,255,.08)', color: '#94a3b8', marginLeft: '12px' }}
               >
                 <span>{p.icon}</span>
                 <span>{p.text}</span>

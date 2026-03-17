@@ -48,52 +48,13 @@ export default function Navbar() {
         boxShadow:      scrolled ? '0 4px 32px rgba(0,0,0,.35)' : 'none',
       }}
     >
-      {/* ── Top row: logo + CTA ── */}
-      <div className="max-w-6xl mx-auto px-5 h-14 flex items-center justify-between">
+      <div className="max-w-6xl mx-auto px-4 h-11 flex items-center justify-center gap-1">
 
-        {/* Logo */}
-        <button
-          onClick={() => smoothScroll('#hero')}
-          className="flex items-center gap-2 font-black text-white hover:opacity-80 transition-opacity"
-          style={{ fontSize: '16px', background: 'none', border: 'none', cursor: 'pointer' }}
-        >
-          <span className="shimmer-text">איתי יצחקי</span>
-          <span style={{ color: 'rgba(255,255,255,.2)', fontWeight: 300 }}>|</span>
-          <span style={{ color: '#94a3b8', fontSize: '12px', fontWeight: 600 }}>מנחה אירועים</span>
-        </button>
-
-        {/* CTA button */}
-        <button
-          onClick={() => smoothScroll('#form')}
-          className="inline-flex items-center gap-2 font-black text-white rounded-xl overflow-hidden relative group"
-          style={{
-            fontSize: '14px', padding: '8px 20px',
-            background: 'linear-gradient(135deg, #ff3b6b, #c026d3)',
-            boxShadow: '0 4px 18px rgba(255,59,107,.38)',
-            border: 'none', cursor: 'pointer',
-          }}
-          onMouseEnter={e => (e.currentTarget.style.boxShadow = '0 8px 28px rgba(255,59,107,.55)')}
-          onMouseLeave={e => (e.currentTarget.style.boxShadow = '0 4px 18px rgba(255,59,107,.38)')}
-        >
-          <span className="relative z-10">קבלת הצעת מחיר</span>
-          <span className="relative z-10">←</span>
-          <span
-            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-            style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,.15), transparent)', transform: 'skewX(-20deg)' }}
-          />
-        </button>
-      </div>
-
-      {/* ── Nav links row — always visible ── */}
-      <div
-        className="max-w-6xl mx-auto px-5 pb-1.5 flex items-center justify-center gap-1"
-        style={{ borderTop: scrolled ? '1px solid rgba(255,255,255,.05)' : 'none' }}
-      >
         {NAV_LINKS.map(link => (
           <button
             key={link.href}
             onClick={() => smoothScroll(link.href)}
-            className="relative px-4 py-1.5 rounded-lg text-sm font-semibold transition-all duration-200"
+            className="relative px-3 py-1.5 rounded-lg text-sm font-semibold transition-all duration-200"
             style={{
               color:      active === link.href ? '#fff' : '#64748b',
               background: active === link.href ? 'rgba(255,255,255,.07)' : 'transparent',
@@ -112,6 +73,28 @@ export default function Navbar() {
             )}
           </button>
         ))}
+
+        <div style={{ width: 1, height: 18, background: 'rgba(255,255,255,.12)', margin: '0 4px' }} />
+
+        <button
+          onClick={() => smoothScroll('#form')}
+          className="inline-flex items-center gap-1.5 font-black text-white rounded-lg relative group flex-shrink-0"
+          style={{
+            fontSize: '13px', padding: '6px 14px', whiteSpace: 'nowrap',
+            background: 'linear-gradient(135deg, #ff3b6b, #c026d3)',
+            boxShadow: '0 3px 14px rgba(255,59,107,.38)',
+            border: 'none', cursor: 'pointer',
+          }}
+          onMouseEnter={e => (e.currentTarget.style.boxShadow = '0 6px 22px rgba(255,59,107,.55)')}
+          onMouseLeave={e => (e.currentTarget.style.boxShadow = '0 3px 14px rgba(255,59,107,.38)')}
+        >
+          <span className="relative z-10">לקבלת מחיר</span>
+          <span className="relative z-10 text-sm">←</span>
+          <span
+            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+            style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,.15), transparent)', transform: 'skewX(-20deg)' }}
+          />
+        </button>
       </div>
     </motion.nav>
   )

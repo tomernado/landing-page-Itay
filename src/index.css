@@ -205,7 +205,7 @@ a, button { touch-action: manipulation; }
 /* ── Marquee for mobile pills ── */
 @keyframes marquee {
   from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+  to   { transform: translateX(50%); }
 }
-.marquee-inner { animation: marquee 22s linear infinite; }
+.marquee-inner { animation: marquee 28s linear infinite; }
 .marquee-inner:hover { animation-play-state: paused; }
