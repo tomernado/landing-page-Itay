@@ -259,7 +259,6 @@ a, button { touch-action: manipulation; }
 
 @media (max-width: 640px) {
   .hero-bg-img {
-    object-position: 60% 10% !important;
     transform-origin: center top;
   }
 }
