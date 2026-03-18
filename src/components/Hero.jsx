@@ -55,8 +55,8 @@ export default function Hero() {
           src={`${import.meta.env.BASE_URL}IMG/itay.jpg`}
           alt=""
           aria-hidden="true"
-          className="w-full h-full object-cover"
-          style={{ objectPosition: 'center 55%' }}
+          className="w-full h-full object-cover hero-bg-img"
+          style={{ objectPosition: '72% 15%' }}
         />
       </motion.div>
 

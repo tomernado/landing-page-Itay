@@ -256,3 +256,10 @@ a, button { touch-action: manipulation; }
 }
 .marquee-inner { animation: marquee 28s linear infinite; }
 .marquee-inner:hover { animation-play-state: paused; }
+
+@media (max-width: 640px) {
+  .hero-bg-img {
+    object-position: 60% 10% !important;
+    transform-origin: center top;
+  }
+}
