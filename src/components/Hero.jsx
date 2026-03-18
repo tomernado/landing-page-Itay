@@ -5,7 +5,7 @@ import SectionStars from './SectionStars'
 /* ── Animated count-up ── */
 function CountUp({ to, suffix = '', duration = 1800 }) {
   const ref    = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-40px' })
+  const inView = useInView(ref, { once: true, amount: 0.1 })
   const [val, setVal] = useState(0)
   useEffect(() => {
     if (!inView) return
