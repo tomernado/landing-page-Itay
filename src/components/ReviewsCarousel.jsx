@@ -190,7 +190,7 @@ export default function ReviewsCarousel() {
           className="font-black text-white mb-8"
           style={{ fontSize: 'clamp(24px, 4vw, 38px)' }}
         >
-          לקוחות מרוצים,{' '}
+          לקוחות מרוצים<br />
           <span className="gradient-text">אירועים בלתי נשכחים</span>
         </motion.h2>
 
