@@ -35,10 +35,10 @@ export default function Navbar() {
       transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
       className="fixed top-0 inset-x-0 z-50 transition-all duration-300"
       style={{
-        background:     scrolled ? 'rgba(6,11,24,.88)' : 'transparent',
-        backdropFilter: scrolled ? 'blur(18px) saturate(180%)' : 'none',
-        borderBottom:   scrolled ? '1px solid rgba(255,255,255,.07)' : 'none',
-        boxShadow:      scrolled ? '0 4px 32px rgba(0,0,0,.35)' : 'none',
+        background:     scrolled ? 'rgba(6,11,24,.45)' : 'transparent',
+        backdropFilter: scrolled ? 'blur(14px) saturate(140%)' : 'none',
+        borderBottom:   scrolled ? '1px solid rgba(255,255,255,.05)' : 'none',
+        boxShadow:      'none',
       }}
     >
       <div className="max-w-6xl mx-auto px-5 h-12 flex items-center justify-between">
