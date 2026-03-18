@@ -192,20 +192,25 @@ a, button { touch-action: manipulation; }
 
 @media (max-width: 640px) {
   .phone-frame {
-    width: min(340px, 90vw);
-    border-radius: 24px;
-    padding: 8px 8px 14px;
+    width: min(360px, 94vw);
+    border-radius: 18px;
+    padding: 0;
+    border: 1.5px solid rgba(255,255,255,.13);
+    box-shadow: 0 20px 60px rgba(0,0,0,.6);
+    background: transparent;
   }
   .phone-frame .notch {
     display: none;
   }
   .phone-frame .screen {
-    border-radius: 18px;
+    border-radius: 16px;
+    background: #fff;
   }
   .phone-frame .screen img {
-    object-fit: cover;
+    object-fit: contain;
     width: 100%;
-    aspect-ratio: 4/5;
+    height: auto;
+    display: block;
   }
 }
 

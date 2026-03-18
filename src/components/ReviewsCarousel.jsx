@@ -143,7 +143,7 @@ export default function ReviewsCarousel() {
         {/* ── 3-card stage ── */}
         <div
           className="relative flex items-center justify-center"
-          style={{ height: 'clamp(460px, 90vw, 520px)', perspective: '1200px' }}
+          style={{ minHeight: 'min(80vw, 500px)', perspective: '1200px' }}
         >
           {/* Prev card (side peek — right in RTL) — hidden on small screens */}
           <div
