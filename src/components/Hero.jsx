@@ -44,7 +44,6 @@ export default function Hero() {
 
   return (
     <section id="hero" ref={heroRef} className="relative w-full overflow-hidden" style={{ minHeight: '100svh' }}>
-      <SectionStars count={10} />
 
       {/* ── Background image with parallax ── */}
       <motion.div
@@ -65,7 +64,7 @@ export default function Hero() {
           alt=""
           aria-hidden="true"
           className="w-full h-full object-cover hero-bg-img block sm:hidden"
-          style={{ objectPosition: 'center 8%' }}
+          style={{ objectPosition: 'center 3%' }}
         />
       </motion.div>
 
@@ -92,6 +91,8 @@ export default function Hero() {
           background: 'radial-gradient(ellipse 70% 55% at 50% 35%, rgba(255,59,107,.12), transparent 65%)',
         }}
       />
+
+      <SectionStars count={10} />
 
       {/* ── Hero content ── */}
       <motion.div
