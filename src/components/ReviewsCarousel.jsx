@@ -264,14 +264,14 @@ export default function ReviewsCarousel() {
         {/* ── 3-card stage ── */}
         <div
           className="relative flex items-center justify-center"
-          style={{ minHeight: 'min(80vw, 500px)', perspective: '1200px' }}
+          style={{ minHeight: 'min(80vw, 680px)', perspective: '1400px' }}
         >
           {/* Prev card (side peek — right in RTL) — hidden on small screens */}
           <div
             className="absolute hidden sm:block"
             style={{
               right: '50%',
-              transform: 'translateX(calc(50% + 220px)) scale(0.72) translateZ(-80px)',
+              transform: 'translateX(calc(50% + 320px)) scale(0.65) translateZ(-120px)',
               zIndex: 1,
               cursor: 'pointer',
             }}
@@ -285,7 +285,7 @@ export default function ReviewsCarousel() {
             className="absolute hidden sm:block"
             style={{
               left: '50%',
-              transform: 'translateX(calc(-50% + -220px)) scale(0.72) translateZ(-80px)',
+              transform: 'translateX(calc(-50% - 320px)) scale(0.65) translateZ(-120px)',
               zIndex: 1,
               cursor: 'pointer',
             }}

@@ -196,7 +196,7 @@ a, button { touch-action: manipulation; }
     0 30px 90px rgba(0,0,0,.75),
     0 0 0 8px rgba(255,255,255,.025);
   padding: 14px 10px 20px;
-  width: min(260px, 72vw);
+  width: min(420px, 40vw);
 }
 .phone-frame .notch {
   width: 72px; height: 18px;
