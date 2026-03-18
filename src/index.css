@@ -61,7 +61,7 @@ a, button { touch-action: manipulation; }
 }
 
 /* ── Meteors (falling stars) ── */
-.meteors { position: fixed; inset: 0; width: 100%; z-index: -1; pointer-events: none; overflow: hidden; }
+.meteors { position: fixed; inset: 0; width: 100%; z-index: 40; pointer-events: none; overflow: hidden; }
 .meteor {
   position: absolute;
   width: var(--size, 1.4px);
