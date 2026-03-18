@@ -51,12 +51,21 @@ export default function Hero() {
         className="absolute inset-0"
         style={{ y: imgY, scale: 1.08, transformOrigin: 'center top' }}
       >
+        {/* Desktop image */}
         <img
           src={`${import.meta.env.BASE_URL}IMG/itay.jpg`}
           alt=""
           aria-hidden="true"
-          className="w-full h-full object-cover hero-bg-img"
+          className="w-full h-full object-cover hero-bg-img hidden sm:block"
           style={{ objectPosition: '72% 15%' }}
+        />
+        {/* Mobile image */}
+        <img
+          src={`${import.meta.env.BASE_URL}IMG/itay-mobile.jpg`}
+          alt=""
+          aria-hidden="true"
+          className="w-full h-full object-cover hero-bg-img block sm:hidden"
+          style={{ objectPosition: 'center 15%' }}
         />
       </motion.div>
 
