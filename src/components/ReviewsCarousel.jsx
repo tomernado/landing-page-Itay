@@ -17,29 +17,101 @@ const IMAGES = [
 const AUTO_MS = 4500
 const DRAG_THRESHOLD = 60
 
-/* ── Lightbox ── */
+/* ── Lightbox with pinch-to-zoom ── */
 function Lightbox({ src, alt, onClose }) {
+  const [scale, setScale]   = useState(1)
+  const [offset, setOffset] = useState({ x: 0, y: 0 })
+  const lastDist  = useRef(null)
+  const lastMid   = useRef(null)
+  const isPinching = useRef(false)
+
   useEffect(() => {
     const onKey = e => { if (e.key === 'Escape') onClose() }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
   }, [onClose])
 
+  const getDist = (t) => {
+    const dx = t[0].clientX - t[1].clientX
+    const dy = t[0].clientY - t[1].clientY
+    return Math.sqrt(dx * dx + dy * dy)
+  }
+  const getMid = (t) => ({
+    x: (t[0].clientX + t[1].clientX) / 2,
+    y: (t[0].clientY + t[1].clientY) / 2,
+  })
+
+  const onTouchStart = (e) => {
+    if (e.touches.length === 2) {
+      isPinching.current = true
+      lastDist.current = getDist(e.touches)
+      lastMid.current  = getMid(e.touches)
+    }
+  }
+
+  const onTouchMove = (e) => {
+    if (e.touches.length === 2 && lastDist.current) {
+      e.preventDefault()
+      const newDist = getDist(e.touches)
+      const ratio   = newDist / lastDist.current
+      const newMid  = getMid(e.touches)
+      setScale(s => Math.min(Math.max(s * ratio, 1), 5))
+      setOffset(o => ({
+        x: o.x + (newMid.x - lastMid.current.x),
+        y: o.y + (newMid.y - lastMid.current.y),
+      }))
+      lastDist.current = newDist
+      lastMid.current  = newMid
+    }
+  }
+
+  const onTouchEnd = (e) => {
+    if (e.touches.length < 2) {
+      lastDist.current = null
+      isPinching.current = false
+    }
+    if (scale <= 1.05) { setScale(1); setOffset({ x: 0, y: 0 }) }
+  }
+
+  const handleBgClick = () => {
+    if (scale > 1.05) { setScale(1); setOffset({ x: 0, y: 0 }) }
+    else onClose()
+  }
+
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center p-4"
-      style={{ background: 'rgba(0,0,0,.88)', backdropFilter: 'blur(8px)' }}
-      onClick={onClose}
+      className="fixed inset-0 z-[100] flex items-center justify-center"
+      style={{ background: 'rgba(0,0,0,.92)', backdropFilter: 'blur(10px)', touchAction: 'none' }}
+      onClick={handleBgClick}
+      onTouchStart={onTouchStart}
+      onTouchMove={onTouchMove}
+      onTouchEnd={onTouchEnd}
     >
       <img
         src={src} alt={alt}
-        onClick={onClose}
-        style={{ maxWidth: '92vw', maxHeight: '90vh', borderRadius: '12px', boxShadow: '0 30px 80px rgba(0,0,0,.7)', objectFit: 'contain' }}
+        onClick={e => e.stopPropagation()}
+        draggable={false}
+        style={{
+          maxWidth: '92vw', maxHeight: '90vh',
+          borderRadius: scale > 1 ? '4px' : '12px',
+          boxShadow: '0 30px 80px rgba(0,0,0,.7)',
+          objectFit: 'contain',
+          transform: `scale(${scale}) translate(${offset.x / scale}px, ${offset.y / scale}px)`,
+          transformOrigin: 'center center',
+          transition: scale === 1 ? 'transform .3s ease' : 'none',
+          cursor: scale > 1 ? 'zoom-out' : 'default',
+          userSelect: 'none',
+        }}
       />
       <button
         onClick={onClose}
-        style={{ position: 'absolute', top: 16, left: 16, background: 'rgba(255,255,255,.12)', border: '1px solid rgba(255,255,255,.2)', color: '#fff', borderRadius: '50%', width: 36, height: 36, fontSize: 18, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+        style={{ position: 'absolute', top: 16, left: 16, background: 'rgba(255,255,255,.12)', border: '1px solid rgba(255,255,255,.2)', color: '#fff', borderRadius: '50%', width: 36, height: 36, fontSize: 18, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1 }}
       >✕</button>
+      {scale === 1 && (
+        <p style={{ position: 'absolute', bottom: 20, left: '50%', transform: 'translateX(-50%)', color: 'rgba(255,255,255,.4)', fontSize: 12, whiteSpace: 'nowrap' }}>
+          צבוט להגדלה · לחץ לסגירה
+        </p>
+      )}
     </div>
   )
 }
