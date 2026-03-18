@@ -193,17 +193,21 @@ export default function Hero() {
 
           {/* Secondary */}
           <a
-            href="#form"
+            href="https://wa.me/972559950111"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2 font-bold rounded-2xl transition-all duration-200 hover:-translate-y-0.5"
             style={{
               fontSize: 'clamp(14px, 2vw, 16px)', padding: '14px 28px',
-              color: '#f0f4ff',
-              background: 'rgba(255,255,255,.10)',
-              border: '1px solid rgba(255,255,255,.18)',
+              color: '#e8f5e9',
+              background: 'rgba(72,180,97,.18)',
+              border: '1px solid rgba(72,180,97,.35)',
               backdropFilter: 'blur(12px)',
             }}
+            onMouseEnter={e => { e.currentTarget.style.background = 'rgba(72,180,97,.28)'; e.currentTarget.style.borderColor = 'rgba(72,180,97,.55)' }}
+            onMouseLeave={e => { e.currentTarget.style.background = 'rgba(72,180,97,.18)'; e.currentTarget.style.borderColor = 'rgba(72,180,97,.35)' }}
           >
-            בדיקת זמינות
+            שליחת הודעה ישירה בוואטסאפ
           </a>
 
           {/* Social */}
