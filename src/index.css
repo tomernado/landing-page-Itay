@@ -60,37 +60,46 @@ a, button { touch-action: manipulation; }
   100% { opacity: 1;  filter: brightness(1.22); }
 }
 
-/* ── Meteors ── */
+/* ── Meteors (falling stars) ── */
 .meteors { position: fixed; inset: 0; width: 100%; z-index: -1; pointer-events: none; overflow: hidden; }
 .meteor {
   position: absolute;
-  width: 1.6px; height: 110px;
-  transform: rotate(-32deg);
+  width: var(--size, 1.4px);
+  height: var(--len, 100px);
+  transform: rotate(-38deg);
   opacity: 0;
-  animation: meteorMove var(--dur, 8s) linear infinite;
+  animation: meteorMove var(--dur, 9s) ease-in infinite;
   animation-delay: var(--delay, 0s);
-  left: var(--x, 50%); top: var(--y, -15%);
+  left: var(--x, 50%);
+  top: var(--y, -15%);
 }
 .meteor::before {
-  content: ''; position: absolute; bottom: -1px; left: 50%;
-  width: 4px; height: 4px; transform: translateX(-50%);
-  border-radius: 50%; background: #fff;
-  filter: drop-shadow(0 0 4px rgba(255,255,255,.9)) drop-shadow(0 0 9px rgba(255,255,255,.5));
+  content: '';
+  position: absolute;
+  bottom: 0; left: 50%;
+  width: calc(var(--size, 1.4px) * 2.5);
+  height: calc(var(--size, 1.4px) * 2.5);
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: rgba(255,255,255,.95);
+  box-shadow: 0 0 6px 2px rgba(200,180,255,.7), 0 0 14px 4px rgba(255,255,255,.3);
 }
 .meteor::after {
-  content: ''; position: absolute; top: 0; bottom: 8px; left: 0; right: 0;
-  background: linear-gradient(to top, rgba(255,255,255,.9) 0%, rgba(255,255,255,.3) 40%, transparent 100%);
-  filter: blur(.3px);
-  mask-image: linear-gradient(to top, black 0%, black 52%, transparent 100%);
+  content: '';
+  position: absolute;
+  bottom: 2px; top: 0; left: 0; right: 0;
+  background: linear-gradient(to bottom, transparent 0%, rgba(180,160,255,.15) 40%, rgba(255,255,255,.55) 100%);
+  border-radius: 99px;
+  filter: blur(.4px);
 }
 @keyframes meteorMove {
-  0%   { opacity: 0; transform: translate3d(0,0,0) rotate(-32deg); }
-  8%   { opacity: 1; }
-  60%  { opacity: .2; transform: translate3d(40vw,42vh,0) rotate(-32deg); }
-  70%  { opacity: 0; }
-  100% { opacity: 0; transform: translate3d(42vw,46vh,0) rotate(-32deg); }
+  0%   { opacity: 0;   transform: translate3d(0, 0, 0)            rotate(-38deg); }
+  6%   { opacity: .9; }
+  55%  { opacity: .35; transform: translate3d(28vw, 60vh, 0)      rotate(-38deg); }
+  75%  { opacity: 0;   transform: translate3d(34vw, 76vh, 0)      rotate(-38deg); }
+  100% { opacity: 0;   transform: translate3d(36vw, 82vh, 0)      rotate(-38deg); }
 }
-@media (max-width: 640px) { .meteor { height: 80px; } }
+@media (max-width: 640px) { .meteor { --len: 70px; } }
 @media (prefers-reduced-motion: reduce) { .meteor { animation: none; opacity: 0; } }
 
 /* ── Gradient text ── */
