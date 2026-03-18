@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
-import { motion, AnimatePresence, useMotionValue, useTransform } from 'framer-motion'
+import { motion, AnimatePresence, useMotionValue } from 'framer-motion'
 
 const IMAGES = [
   { src: '/IMG/IMG_6097.JPG', alt: 'המלצה 1' },
@@ -143,7 +143,7 @@ export default function ReviewsCarousel() {
         {/* ── 3-card stage ── */}
         <div
           className="relative flex items-center justify-center"
-          style={{ height: 'clamp(380px, 60vw, 480px)', perspective: '1200px' }}
+          style={{ height: 'clamp(460px, 90vw, 520px)', perspective: '1200px' }}
         >
           {/* Prev card (side peek — right in RTL) — hidden on small screens */}
           <div
