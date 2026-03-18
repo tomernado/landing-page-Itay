@@ -94,7 +94,7 @@ a, button { touch-action: manipulation; }
 }
 @keyframes meteorMove {
   0%   { opacity: 0;   transform: translate3d(0, 0, 0)            rotate(-38deg); }
-  6%   { opacity: .9; }
+  6%   { opacity: .65; }
   55%  { opacity: .35; transform: translate3d(28vw, 60vh, 0)      rotate(-38deg); }
   75%  { opacity: 0;   transform: translate3d(34vw, 76vh, 0)      rotate(-38deg); }
   100% { opacity: 0;   transform: translate3d(36vw, 82vh, 0)      rotate(-38deg); }
