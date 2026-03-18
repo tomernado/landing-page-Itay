@@ -54,7 +54,7 @@ export default function Hero() {
           alt=""
           aria-hidden="true"
           className="w-full h-full object-cover"
-          style={{ objectPosition: 'center 30%' }}
+          style={{ objectPosition: 'center 65%' }}
         />
       </motion.div>
 
@@ -84,8 +84,8 @@ export default function Hero() {
 
       {/* ── Hero content ── */}
       <motion.div
-        style={{ y: contentY, opacity: contentOpacity, minHeight: '100svh', paddingTop: '4px', paddingBottom: '40px' }}
-        className="relative z-10 flex flex-col items-center justify-center text-center px-6"
+        style={{ y: contentY, opacity: contentOpacity, minHeight: '100svh', paddingTop: '72px', paddingBottom: '40px' }}
+        className="relative z-10 flex flex-col items-center justify-start text-center px-6"
       >
         {/* Badge */}
         <motion.div
