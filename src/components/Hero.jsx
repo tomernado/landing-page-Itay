@@ -50,7 +50,7 @@ export default function Hero() {
         style={{ y: imgY, scale: 1.08, transformOrigin: 'center top' }}
       >
         <img
-          src="/IMG/itay.jpg"
+          src={`${import.meta.env.BASE_URL}IMG/itay.jpg`}
           alt=""
           aria-hidden="true"
           className="w-full h-full object-cover"

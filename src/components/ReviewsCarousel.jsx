@@ -1,14 +1,16 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { motion, AnimatePresence, useMotionValue } from 'framer-motion'
 
+const BASE = import.meta.env.BASE_URL
+
 const IMAGES = [
-  { src: '/IMG/IMG_6097.JPG', alt: 'המלצה 1' },
-  { src: '/IMG/IMG_6098.PNG', alt: 'המלצה 2' },
-  { src: '/IMG/IMG_6100.JPG', alt: 'המלצה 3' },
-  { src: '/IMG/IMG_6101.JPG', alt: 'המלצה 4' },
-  { src: '/IMG/IMG_6102.PNG', alt: 'המלצה 5' },
-  { src: '/IMG/IMG_6103.JPG', alt: 'המלצה 6' },
-  { src: '/IMG/IMG_6104.JPG', alt: 'המלצה 7' },
+  { src: `${BASE}IMG/IMG_6097.JPG`, alt: 'המלצה 1' },
+  { src: `${BASE}IMG/IMG_6098.PNG`, alt: 'המלצה 2' },
+  { src: `${BASE}IMG/IMG_6100.JPG`, alt: 'המלצה 3' },
+  { src: `${BASE}IMG/IMG_6101.JPG`, alt: 'המלצה 4' },
+  { src: `${BASE}IMG/IMG_6102.PNG`, alt: 'המלצה 5' },
+  { src: `${BASE}IMG/IMG_6103.JPG`, alt: 'המלצה 6' },
+  { src: `${BASE}IMG/IMG_6104.JPG`, alt: 'המלצה 7' },
 ]
 
 const AUTO_MS = 4500
