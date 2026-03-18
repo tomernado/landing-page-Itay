@@ -96,7 +96,7 @@ export default function Hero() {
 
       {/* ── Hero content ── */}
       <motion.div
-        style={{ y: contentY, opacity: contentOpacity, minHeight: '100svh', paddingTop: '72px', paddingBottom: '40px' }}
+        style={{ y: contentY, opacity: contentOpacity, minHeight: '100svh', paddingTop: '110px', paddingBottom: '40px' }}
         className="relative z-10 flex flex-col items-center justify-start text-center px-6"
       >
         {/* Badge */}
