@@ -64,7 +64,7 @@ function PhoneFrame({ src, alt, isActive }) {
           <button
             onClick={() => setLightbox(true)}
             style={{
-              position: 'absolute', top: 30, left: 12,
+              position: 'absolute', top: 8, left: 12,
               background: 'rgba(255,255,255,.07)', backdropFilter: 'blur(8px)',
               border: '1px solid rgba(255,255,255,.12)', borderRadius: '50%',
               width: 30, height: 30, cursor: 'pointer',
