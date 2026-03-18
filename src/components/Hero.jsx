@@ -132,6 +132,7 @@ export default function Hero() {
           style={{
             fontSize: 'clamp(22px, 4.5vw, 48px)',
             letterSpacing: '-.01em',
+            marginTop: '10px',
           }}
         >
           מנחה אירועים
