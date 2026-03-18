@@ -31,7 +31,7 @@ const FEATURES = [
   {
     icon: '📸',
     title: 'חבילת צילום מקצועית',
-    desc: 'מרכזים הכל תחת גג אחד — צלם מגנטים, צלם סטילס, או שניהם. פחות תיאום, יותר זיכרונות.',
+    desc: 'אופציה להרחבה לחבילת צילום:\n• מגנטים ללא הגבלה + סטילס\n• סטילס בלבד',
     color: '#facc15',
     glow: 'rgba(250,204,21,.14)',
     gradient: 'linear-gradient(135deg, rgba(250,204,21,.12), rgba(250,204,21,.03))',
@@ -139,7 +139,7 @@ export default function Features() {
 
               {/* Description */}
               <p
-                style={{ fontSize: '13px', color: '#64748b', lineHeight: 1.7 }}
+                style={{ fontSize: '13px', color: '#64748b', lineHeight: 1.7, whiteSpace: 'pre-line' }}
               >
                 {f.desc}
               </p>
