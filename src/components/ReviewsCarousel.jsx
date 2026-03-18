@@ -69,14 +69,12 @@ function Lightbox({ src, alt, onClose }) {
     if (e.touches.length < 2) {
       lastDist.current = null
       isPinching.current = false
+      setScale(1)
+      setOffset({ x: 0, y: 0 })
     }
-    if (scale <= 1.05) { setScale(1); setOffset({ x: 0, y: 0 }) }
   }
 
-  const handleBgClick = () => {
-    if (scale > 1.05) { setScale(1); setOffset({ x: 0, y: 0 }) }
-    else onClose()
-  }
+  const handleBgClick = () => onClose()
 
   return (
     <div
