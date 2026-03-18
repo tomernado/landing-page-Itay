@@ -260,5 +260,6 @@ a, button { touch-action: manipulation; }
 @media (max-width: 640px) {
   .hero-bg-img {
     transform-origin: center top;
+    scale: 1.18;
   }
 }
