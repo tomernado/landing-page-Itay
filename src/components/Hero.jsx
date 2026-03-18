@@ -65,7 +65,7 @@ export default function Hero() {
           alt=""
           aria-hidden="true"
           className="w-full h-full object-cover hero-bg-img block sm:hidden"
-          style={{ objectPosition: 'center 22%' }}
+          style={{ objectPosition: 'center 14%' }}
         />
       </motion.div>
 
