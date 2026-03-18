@@ -47,19 +47,6 @@ function Lightbox({ src, alt, onClose }) {
 /* ── Phone-frame wrapper ── */
 function PhoneFrame({ src, alt, isActive }) {
   const [lightbox, setLightbox] = useState(false)
-  const [imgRatio, setImgRatio] = useState(null) // naturalHeight / naturalWidth
-
-  const onImgLoad = (e) => {
-    const { naturalWidth, naturalHeight } = e.currentTarget
-    if (naturalWidth > 0) setImgRatio(naturalHeight / naturalWidth)
-  }
-
-  // Phone width comes from CSS (.phone-frame), ~300px on desktop, ~86vw on mobile
-  // We compute a dynamic screen height based on the image's real aspect ratio,
-  // clamped between a min and max so tiny or enormous images stay sane.
-  const frameWidth = 300
-  const rawH = imgRatio ? Math.round(frameWidth * imgRatio) : null
-  const screenHeight = rawH ? Math.min(Math.max(rawH, 220), 680) : null
 
   return (
     <>
@@ -68,11 +55,10 @@ function PhoneFrame({ src, alt, isActive }) {
         style={{ opacity: isActive ? 1 : 0.38, transition: 'opacity .4s, transform .4s', flexShrink: 0, position: 'relative' }}
       >
         <div className="notch" />
-        <div className="screen" style={{ overflow: 'hidden', ...(screenHeight ? { height: screenHeight } : {}) }}>
+        <div className="screen">
           <img
             src={src} alt={alt} draggable={false}
-            onLoad={onImgLoad}
-            style={{ userSelect: 'none', pointerEvents: 'none', objectFit: screenHeight ? 'contain' : 'cover', objectPosition: 'center top', width: '100%', height: '100%', background: '#fff' }}
+            style={{ userSelect: 'none', pointerEvents: 'none' }}
           />
         </div>
 

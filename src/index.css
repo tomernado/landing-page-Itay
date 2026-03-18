@@ -209,14 +209,13 @@ a, button { touch-action: manipulation; }
 .phone-frame .screen {
   border-radius: 12px;
   overflow: hidden;
-  background: #fff;
+  background: #0d1220;
   line-height: 0;
 }
 .phone-frame .screen img {
   width: 100%;
+  height: auto;
   display: block;
-  object-fit: cover;
-  object-position: center top;
 }
 
 @media (max-width: 640px) {
@@ -230,10 +229,8 @@ a, button { touch-action: manipulation; }
     margin: 0 auto 8px;
   }
   .phone-frame .screen img {
-    object-fit: contain;
     width: 100%;
     height: auto;
-    max-height: none;
   }
 }
 
