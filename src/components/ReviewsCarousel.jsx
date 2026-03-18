@@ -14,35 +14,82 @@ const IMAGES = [
 const AUTO_MS = 4500
 const DRAG_THRESHOLD = 60
 
-/* ── Phone-frame wrapper ── */
-function PhoneFrame({ src, alt, isActive }) {
+/* ── Lightbox ── */
+function Lightbox({ src, alt, onClose }) {
+  useEffect(() => {
+    const onKey = e => { if (e.key === 'Escape') onClose() }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [onClose])
+
   return (
     <div
-      className="phone-frame select-none"
-      style={{
-        opacity:    isActive ? 1 : 0.38,
-        transition: 'opacity .4s, transform .4s',
-        flexShrink: 0,
-      }}
+      className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+      style={{ background: 'rgba(0,0,0,.88)', backdropFilter: 'blur(8px)' }}
+      onClick={onClose}
     >
-      <div className="notch" />
-      <div className="screen">
-        <img
-          src={src}
-          alt={alt}
-          draggable={false}
-          style={{ userSelect: 'none', pointerEvents: 'none' }}
-        />
+      <img
+        src={src} alt={alt}
+        onClick={e => e.stopPropagation()}
+        style={{ maxWidth: '92vw', maxHeight: '90vh', borderRadius: '12px', boxShadow: '0 30px 80px rgba(0,0,0,.7)', objectFit: 'contain' }}
+      />
+      <button
+        onClick={onClose}
+        style={{ position: 'absolute', top: 16, left: 16, background: 'rgba(255,255,255,.12)', border: '1px solid rgba(255,255,255,.2)', color: '#fff', borderRadius: '50%', width: 36, height: 36, fontSize: 18, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+      >✕</button>
+    </div>
+  )
+}
+
+/* ── Phone-frame wrapper ── */
+function PhoneFrame({ src, alt, isActive }) {
+  const [lightbox, setLightbox] = useState(false)
+
+  return (
+    <>
+      <div
+        className="phone-frame select-none"
+        style={{ opacity: isActive ? 1 : 0.38, transition: 'opacity .4s, transform .4s', flexShrink: 0, position: 'relative' }}
+      >
+        <div className="notch" />
+        <div className="screen" style={{ overflow: 'hidden' }}>
+          <img
+            src={src} alt={alt} draggable={false}
+            style={{ userSelect: 'none', pointerEvents: 'none', objectFit: 'cover', objectPosition: 'center top', width: '100%' }}
+          />
+        </div>
+
+        {/* Magnifier button — only on active card */}
+        {isActive && (
+          <button
+            onClick={() => setLightbox(true)}
+            style={{
+              position: 'absolute', bottom: 12, left: 12,
+              background: 'rgba(255,255,255,.15)', backdropFilter: 'blur(10px)',
+              border: '1px solid rgba(255,255,255,.25)', borderRadius: '50%',
+              width: 34, height: 34, cursor: 'pointer',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              color: '#fff', fontSize: 15, transition: 'background .2s',
+            }}
+            onMouseEnter={e => (e.currentTarget.style.background = 'rgba(255,255,255,.28)')}
+            onMouseLeave={e => (e.currentTarget.style.background = 'rgba(255,255,255,.15)')}
+            aria-label="הצג תמונה מוגדלת"
+          >
+            🔍
+          </button>
+        )}
+
+        {/* Active glow */}
+        {isActive && (
+          <div
+            className="absolute inset-0 rounded-[40px] pointer-events-none"
+            style={{ boxShadow: '0 0 60px rgba(255,59,107,.28), 0 0 120px rgba(192,38,211,.14)' }}
+          />
+        )}
       </div>
 
-      {/* Active glow */}
-      {isActive && (
-        <div
-          className="absolute inset-0 rounded-[40px] pointer-events-none"
-          style={{ boxShadow: '0 0 60px rgba(255,59,107,.28), 0 0 120px rgba(192,38,211,.14)' }}
-        />
-      )}
-    </div>
+      {lightbox && <Lightbox src={src} alt={alt} onClose={() => setLightbox(false)} />}
+    </>
   )
 }
 
