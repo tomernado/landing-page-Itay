@@ -54,7 +54,7 @@ export default function Hero() {
           alt=""
           aria-hidden="true"
           className="w-full h-full object-cover"
-          style={{ objectPosition: 'center 65%' }}
+          style={{ objectPosition: 'center 85%' }}
         />
       </motion.div>
 
