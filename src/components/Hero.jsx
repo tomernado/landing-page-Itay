@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect } from 'react'
 import { motion, useInView, useScroll, useTransform } from 'framer-motion'
+import SectionStars from './SectionStars'
 
 /* ── Animated count-up ── */
 function CountUp({ to, suffix = '', duration = 1800 }) {
@@ -43,6 +44,7 @@ export default function Hero() {
 
   return (
     <section id="hero" ref={heroRef} className="relative w-full overflow-hidden" style={{ minHeight: '100svh' }}>
+      <SectionStars count={10} />
 
       {/* ── Background image with parallax ── */}
       <motion.div
@@ -54,7 +56,7 @@ export default function Hero() {
           alt=""
           aria-hidden="true"
           className="w-full h-full object-cover"
-          style={{ objectPosition: 'center 20%' }}
+          style={{ objectPosition: 'center 55%' }}
         />
       </motion.div>
 
@@ -92,7 +94,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.2 }}
-          className="flex items-center gap-2.5 mb-7"
+          className="flex items-center gap-2.5 mb-2"
         >
           <span className="relative flex h-2.5 w-2.5 flex-shrink-0">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75" style={{ background: '#ff3b6b' }} />

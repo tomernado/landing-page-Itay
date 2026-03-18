@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { motion, AnimatePresence, useMotionValue } from 'framer-motion'
+import SectionStars from './SectionStars'
 
 const BASE = import.meta.env.BASE_URL
 
@@ -165,6 +166,7 @@ export default function ReviewsCarousel() {
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
+      <SectionStars count={7} />
       {/* Background blobs */}
       <div className="absolute inset-0 pointer-events-none">
         <div style={{

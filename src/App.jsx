@@ -5,7 +5,6 @@ import Features from './components/Features'
 import ReviewsCarousel from './components/ReviewsCarousel'
 import ContactForm from './components/ContactForm'
 import Footer from './components/Footer'
-import ShootingStars from './components/ShootingStars'
 
 function SectionDivider() {
   return <div className="section-glow mx-6 md:mx-16" />
@@ -31,7 +30,6 @@ export default function App() {
     >
       {/* Fixed background layers */}
       <div className="stars" aria-hidden="true" />
-      <ShootingStars />
       <Navbar />
 
       <Hero />

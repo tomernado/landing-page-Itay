@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import SectionStars from './SectionStars'
 
 const FEATURES = [
   {
@@ -50,6 +51,7 @@ const cardVariants = {
 export default function Features() {
   return (
     <section id="features" className="reveal py-14 px-6 relative overflow-hidden">
+      <SectionStars count={8} />
       {/* Section background blob */}
       <div
         className="absolute inset-0 pointer-events-none"

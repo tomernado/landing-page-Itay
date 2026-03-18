@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import SectionStars from './SectionStars'
 
 const PHOTO_OPTIONS = [
   { value: 'צלם מגנטים + סטילס', label: 'צלם מגנטים + סטילס' },
@@ -67,7 +68,8 @@ export default function ContactForm() {
   })
 
   return (
-    <section id="form" className="reveal pb-24 px-6">
+    <section id="form" className="reveal pb-24 px-6 relative overflow-hidden">
+      <SectionStars count={6} />
       <div className="max-w-2xl mx-auto">
 
         {/* Glass card */}
