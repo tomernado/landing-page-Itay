@@ -64,15 +64,15 @@ function PhoneFrame({ src, alt, isActive }) {
           <button
             onClick={() => setLightbox(true)}
             style={{
-              position: 'absolute', bottom: 12, left: 12,
-              background: 'rgba(255,255,255,.15)', backdropFilter: 'blur(10px)',
-              border: '1px solid rgba(255,255,255,.25)', borderRadius: '50%',
-              width: 34, height: 34, cursor: 'pointer',
+              position: 'absolute', top: 30, left: 12,
+              background: 'rgba(255,255,255,.07)', backdropFilter: 'blur(8px)',
+              border: '1px solid rgba(255,255,255,.12)', borderRadius: '50%',
+              width: 30, height: 30, cursor: 'pointer',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
-              color: '#fff', fontSize: 15, transition: 'background .2s',
+              color: 'rgba(255,255,255,.5)', fontSize: 13, transition: 'all .2s',
             }}
-            onMouseEnter={e => (e.currentTarget.style.background = 'rgba(255,255,255,.28)')}
-            onMouseLeave={e => (e.currentTarget.style.background = 'rgba(255,255,255,.15)')}
+            onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,.18)'; e.currentTarget.style.color = '#fff' }}
+            onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,.07)'; e.currentTarget.style.color = 'rgba(255,255,255,.5)' }}
             aria-label="הצג תמונה מוגדלת"
           >
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
