@@ -107,11 +107,6 @@ function Lightbox({ src, alt, onClose }) {
         onClick={onClose}
         style={{ position: 'absolute', top: 16, left: 16, background: 'rgba(255,255,255,.12)', border: '1px solid rgba(255,255,255,.2)', color: '#fff', borderRadius: '50%', width: 36, height: 36, fontSize: 18, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1 }}
       >✕</button>
-      {scale === 1 && (
-        <p style={{ position: 'absolute', bottom: 20, left: '50%', transform: 'translateX(-50%)', color: 'rgba(255,255,255,.4)', fontSize: 12, whiteSpace: 'nowrap' }}>
-          צבוט להגדלה · לחץ לסגירה
-        </p>
-      )}
     </div>
   )
 }
