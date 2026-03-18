@@ -1,38 +1,31 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 
-const NAV_LINKS = [
-  { label: 'ראשי',     href: '#hero' },
-  { label: 'מה כלול',  href: '#features' },
-  { label: 'המלצות',   href: '#reviews' },
-  { label: 'צור קשר',  href: '#form' },
-]
+function InstagramIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+      <circle cx="12" cy="12" r="4"/>
+      <circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" stroke="none"/>
+    </svg>
+  )
+}
 
-function smoothScroll(href) {
-  const el = document.querySelector(href)
-  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+function TikTokIcon() {
+  return (
+    <svg width="16" height="18" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.77a4.85 4.85 0 0 1-1.01-.08z"/>
+    </svg>
+  )
 }
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
-  const [active,   setActive]   = useState('#hero')
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 48)
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
-  }, [])
-
-  useEffect(() => {
-    const ids = NAV_LINKS.map(l => l.href.slice(1))
-    const obs = new IntersectionObserver(
-      entries => {
-        entries.forEach(e => { if (e.isIntersecting) setActive('#' + e.target.id) })
-      },
-      { rootMargin: '-40% 0px -55% 0px' }
-    )
-    ids.forEach(id => { const el = document.getElementById(id); if (el) obs.observe(el) })
-    return () => obs.disconnect()
   }, [])
 
   return (
@@ -48,53 +41,64 @@ export default function Navbar() {
         boxShadow:      scrolled ? '0 4px 32px rgba(0,0,0,.35)' : 'none',
       }}
     >
-      <div className="max-w-6xl mx-auto px-4 h-11 flex items-center justify-center gap-1">
+      <div className="max-w-6xl mx-auto px-5 h-12 flex items-center justify-between">
 
-        {NAV_LINKS.map(link => (
-          <button
-            key={link.href}
-            onClick={() => smoothScroll(link.href)}
-            className="relative px-3 py-1.5 rounded-lg text-sm font-semibold transition-all duration-200"
-            style={{
-              color:      active === link.href ? '#fff' : '#64748b',
-              background: active === link.href ? 'rgba(255,255,255,.07)' : 'transparent',
-              border:     'none',
-              cursor:     'pointer',
-              whiteSpace: 'nowrap',
-            }}
+        {/* Right — Logo */}
+        <div className="flex flex-col leading-none">
+          <span style={{ fontSize: '13px', fontWeight: 800, letterSpacing: '0.04em', color: '#fff', opacity: 0.95 }}>
+            ITAY ITZHAKI
+          </span>
+          <span style={{ fontSize: '10px', fontWeight: 500, letterSpacing: '0.12em', color: '#ff3b6b', opacity: 0.85, textTransform: 'uppercase' }}>
+            Events
+          </span>
+        </div>
+
+        {/* Left — Socials + CTA */}
+        <div className="flex items-center gap-3">
+          <a
+            href="https://www.instagram.com/itayitzhaki1/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="transition-colors duration-200"
+            style={{ color: 'rgba(255,255,255,.55)' }}
+            onMouseEnter={e => (e.currentTarget.style.color = '#ff3b6b')}
+            onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,.55)')}
           >
-            {link.label}
-            {active === link.href && (
-              <motion.span
-                layoutId="nav-dot"
-                className="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full"
-                style={{ background: '#ff3b6b' }}
-              />
-            )}
+            <InstagramIcon />
+          </a>
+          <a
+            href="https://www.tiktok.com/@itayitzhaki1"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="transition-colors duration-200"
+            style={{ color: 'rgba(255,255,255,.55)' }}
+            onMouseEnter={e => (e.currentTarget.style.color = '#ff3b6b')}
+            onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,.55)')}
+          >
+            <TikTokIcon />
+          </a>
+
+          <div style={{ width: 1, height: 16, background: 'rgba(255,255,255,.12)' }} />
+
+          <button
+            onClick={() => {
+              const el = document.getElementById('form')
+              if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+            }}
+            className="inline-flex items-center gap-1.5 font-black text-white rounded-lg relative group flex-shrink-0"
+            style={{
+              fontSize: '13px', padding: '6px 14px', whiteSpace: 'nowrap',
+              background: 'linear-gradient(135deg, #ff3b6b, #c026d3)',
+              boxShadow: '0 3px 14px rgba(255,59,107,.38)',
+              border: 'none', cursor: 'pointer',
+            }}
+            onMouseEnter={e => (e.currentTarget.style.boxShadow = '0 6px 22px rgba(255,59,107,.55)')}
+            onMouseLeave={e => (e.currentTarget.style.boxShadow = '0 3px 14px rgba(255,59,107,.38)')}
+          >
+            לקבלת מחיר ←
           </button>
-        ))}
+        </div>
 
-        <div style={{ width: 1, height: 18, background: 'rgba(255,255,255,.12)', margin: '0 4px' }} />
-
-        <button
-          onClick={() => smoothScroll('#form')}
-          className="inline-flex items-center gap-1.5 font-black text-white rounded-lg relative group flex-shrink-0"
-          style={{
-            fontSize: '13px', padding: '6px 14px', whiteSpace: 'nowrap',
-            background: 'linear-gradient(135deg, #ff3b6b, #c026d3)',
-            boxShadow: '0 3px 14px rgba(255,59,107,.38)',
-            border: 'none', cursor: 'pointer',
-          }}
-          onMouseEnter={e => (e.currentTarget.style.boxShadow = '0 6px 22px rgba(255,59,107,.55)')}
-          onMouseLeave={e => (e.currentTarget.style.boxShadow = '0 3px 14px rgba(255,59,107,.38)')}
-        >
-          <span className="relative z-10">לקבלת מחיר</span>
-          <span className="relative z-10 text-sm">←</span>
-          <span
-            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-            style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,.15), transparent)', transform: 'skewX(-20deg)' }}
-          />
-        </button>
       </div>
     </motion.nav>
   )
