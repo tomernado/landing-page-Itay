@@ -2,12 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ── Tel Aviv Brutalist ── */
+@font-face {
+  font-family: 'Tel Aviv';
+  src: url('./fonts/telaviv-brutalistlight.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Tel Aviv';
+  src: url('./fonts/telaviv-brutalistregular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Tel Aviv';
+  src: url('./fonts/telaviv-brutalistbold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ── Global ── */
 *, *::before, *::after { box-sizing: border-box; }
 
 html, body {
   margin: 0; padding: 0;
-  font-family: 'Heebo', system-ui, sans-serif;
+  font-family: 'Tel Aviv', system-ui, sans-serif;
   direction: rtl;
   overflow-x: hidden;
   overscroll-behavior-x: none;

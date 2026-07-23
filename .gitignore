@@ -1,3 +1,6 @@
+# Raw source media (unused originals — not served, kept locally only)
+source-assets/
+
 # Logs
 logs
 *.log

@@ -16,7 +16,7 @@ export default {
         },
       },
       fontFamily: {
-        heebo: ['"Heebo"', 'system-ui', 'sans-serif'],
+        telaviv: ['"Tel Aviv"', 'system-ui', 'sans-serif'],
       },
       animation: {
         'fade-up':   'fadeUp .6s ease both',

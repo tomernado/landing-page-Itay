@@ -336,7 +336,7 @@ export default function ReviewsCarousel() {
             onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,59,107,.5)'; e.currentTarget.style.borderColor = '#ff3b6b' }}
             onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,.08)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,.15)' }}
           >
-            ›
+            ‹
           </button>
 
           {/* Dot indicators */}
@@ -367,7 +367,7 @@ export default function ReviewsCarousel() {
             onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,59,107,.5)'; e.currentTarget.style.borderColor = '#ff3b6b' }}
             onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,.08)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,.15)' }}
           >
-            ‹
+            ›
           </button>
         </div>
 

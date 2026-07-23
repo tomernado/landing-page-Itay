@@ -118,35 +118,20 @@ export default function Hero() {
           </span>
         </motion.div>
 
-        {/* Main name — very large */}
-        <motion.h1
+        {/* Logo — replaces name + subtitle */}
+        <motion.img
+          src={`${import.meta.env.BASE_URL}IMG/logo-transparent.png`}
+          alt="איתי יצחקי אירועים"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.85, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-          className="font-black text-white leading-none mb-3"
+          className="mb-6"
           style={{
-            fontSize: 'clamp(52px, 10vw, 110px)',
-            textShadow: '0 4px 40px rgba(0,0,0,.6), 0 0 120px rgba(255,59,107,.12)',
-            letterSpacing: '-.02em',
+            width: 'clamp(260px, 42vw, 560px)',
+            height: 'auto',
+            filter: 'drop-shadow(0 4px 40px rgba(0,0,0,.6)) drop-shadow(0 0 120px rgba(255,59,107,.12))',
           }}
-        >
-          איתי יצחקי
-        </motion.h1>
-
-        {/* Subtitle with gradient */}
-        <motion.p
-          initial={{ opacity: 0, y: 22 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.75, delay: 0.42, ease: [0.22, 1, 0.36, 1] }}
-          className="shimmer-text font-black mb-6"
-          style={{
-            fontSize: 'clamp(22px, 4.5vw, 48px)',
-            letterSpacing: '-.01em',
-            marginTop: '10px',
-          }}
-        >
-          מנחה אירועים
-        </motion.p>
+        />
 
         {/* Decorative divider */}
         <motion.div
@@ -166,7 +151,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.62 }}
           className="max-w-lg mb-10 text-center"
-          style={{ color: 'rgba(255,255,255,.72)', fontSize: 'clamp(15px, 2vw, 17px)', lineHeight: 1.9 }}
+          style={{ color: 'rgba(255,255,255,.72)', fontSize: 'clamp(16px, 2.3vw, 19px)', lineHeight: 1.9 }}
         >
           <p>
             <strong style={{ color: '#fff', fontWeight: 700 }}>מחפשים אירוע שכולם ידברו עליו?</strong>
@@ -174,7 +159,7 @@ export default function Hero() {
           <p className="mt-2">
             מצאתי את הנוסחה המושלמת.<br />הנחיה מגבשת, ייחודית עם אינספור רגעים של צחוק והתרגשות.
           </p>
-          <p className="mt-3" style={{ color: 'rgba(255,255,255,.5)', fontSize: 'clamp(13px, 1.6vw, 15px)' }}>
+          <p className="mt-3" style={{ color: 'rgba(255,255,255,.5)', fontSize: 'clamp(14px, 1.8vw, 16px)' }}>
             אני והצוות שלי נלווה אתכם לכל אורך הדרך.
           </p>
         </motion.div>

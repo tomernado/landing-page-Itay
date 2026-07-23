@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
+import VideoShowcase from './components/VideoShowcase'
 import Features from './components/Features'
 import ReviewsCarousel from './components/ReviewsCarousel'
 import ContactForm from './components/ContactForm'
@@ -25,7 +26,7 @@ export default function App() {
 
   return (
     <div
-      className="relative min-h-screen font-heebo overflow-x-hidden"
+      className="relative min-h-screen font-telaviv overflow-x-hidden"
       style={{ background: '#060b18' }}
     >
       {/* Fixed background layers */}
@@ -33,6 +34,8 @@ export default function App() {
       <Navbar />
 
       <Hero />
+      <SectionDivider />
+      <VideoShowcase />
       <SectionDivider />
       <Features />
       <SectionDivider />
