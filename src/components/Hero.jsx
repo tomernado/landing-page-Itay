@@ -120,7 +120,7 @@ export default function Hero() {
 
         {/* Logo — replaces name + subtitle */}
         <motion.img
-          src={`${import.meta.env.BASE_URL}IMG/logo-transparent.png`}
+          src={`${import.meta.env.BASE_URL}IMG/logo-transparent.webp`}
           alt="איתי יצחקי אירועים"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}

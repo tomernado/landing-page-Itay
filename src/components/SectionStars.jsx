@@ -69,8 +69,25 @@ export default function SectionStars({ count = 10 }) {
     // seed with random life so they don't all start at once
     const stars = Array.from({ length: count }, () => spawnStar(W, H, true))
     let rafId
+    let paused = false
+
+    // Pause redraws during pinch-zoom — zooming already forces the browser
+    // to re-rasterize everything at a new scale, and piling continuous
+    // canvas redraws on top of that has crashed the tab on some phones.
+    // Zoom itself stays fully available (accessibility) — we only skip our
+    // own animation work while a pinch gesture is in progress.
+    const pause  = () => { paused = true }
+    const resume = () => { paused = false }
+    document.addEventListener('gesturestart', pause)
+    document.addEventListener('gestureend', resume)
+    const onTouchStart = e => { if (e.touches.length > 1) pause() }
+    const onTouchEnd   = () => resume()
+    document.addEventListener('touchstart', onTouchStart, { passive: true })
+    document.addEventListener('touchend', onTouchEnd, { passive: true })
+    document.addEventListener('touchcancel', onTouchEnd, { passive: true })
 
     function draw() {
+      if (paused) { rafId = requestAnimationFrame(draw); return }
       ctx.clearRect(0, 0, W, H)
 
       stars.forEach((s, i) => {

@@ -1,5 +1,5 @@
 import { useState, useRef, useCallback, useEffect } from 'react'
-import { motion, AnimatePresence, useMotionValue } from 'framer-motion'
+import { motion, AnimatePresence, useMotionValue, useInView } from 'framer-motion'
 import SectionStars from './SectionStars'
 
 const BASE = import.meta.env.BASE_URL
@@ -72,7 +72,8 @@ function VideoLightbox({ src, startTime, onClose }) {
 }
 
 /* ── One card in the 3-card stage ── */
-function VideoCard({ video, isActive, muted, onToggleMute, onExpand, onEnded, videoRef }) {
+function VideoCard({ video, isActive, canLoad, muted, onToggleMute, onExpand, onEnded, videoRef }) {
+  const showVideo = isActive && canLoad
   return (
     <div
       className="relative select-none"
@@ -89,11 +90,12 @@ function VideoCard({ video, isActive, muted, onToggleMute, onExpand, onEnded, vi
         boxShadow: isActive ? '0 0 60px rgba(255,59,107,.28), 0 0 120px rgba(192,38,211,.14)' : 'none',
       }}
     >
-      {isActive ? (
+      {showVideo ? (
         <video
           ref={videoRef}
           src={video.src}
           poster={video.poster}
+          preload="auto"
           autoPlay
           muted={muted}
           playsInline
@@ -109,7 +111,7 @@ function VideoCard({ video, isActive, muted, onToggleMute, onExpand, onEnded, vi
         />
       )}
 
-      {isActive && (
+      {showVideo && (
         <>
           <button
             onClick={onToggleMute}
@@ -151,6 +153,10 @@ export default function VideoShowcase() {
   const [muted, setMuted] = useState(true)
   const [lightbox, setLightbox] = useState(null)
   const videoRef = useRef(null)
+  const sectionRef = useRef(null)
+  // Don't fetch any video until the section is actually about to be seen —
+  // otherwise it competes for bandwidth with the Hero's own images on load.
+  const canLoad = useInView(sectionRef, { once: true, amount: 0.2 })
 
   const n = VIDEOS.length
 
@@ -206,7 +212,7 @@ export default function VideoShowcase() {
   const nextIdx = (current + 1) % n
 
   return (
-    <section id="videos" className="reveal py-14 px-4 relative overflow-hidden">
+    <section id="videos" ref={sectionRef} className="reveal py-14 px-4 relative overflow-hidden">
       <SectionStars count={7} />
 
       <div className="max-w-5xl mx-auto relative text-center">
@@ -269,6 +275,7 @@ export default function VideoShowcase() {
                 <VideoCard
                   video={VIDEOS[current]}
                   isActive={true}
+                  canLoad={canLoad}
                   muted={muted}
                   onToggleMute={toggleMute}
                   onExpand={openLightbox}
