@@ -5,10 +5,10 @@ import SectionStars from './SectionStars'
 const BASE = import.meta.env.BASE_URL
 
 const VIDEOS = [
-  { id: 'news',     label: 'חדשות',      src: `${BASE}videos/news.mp4`,     poster: `${BASE}videos/news-poster.jpg` },
+  { id: 'tiktok',   label: 'טיקטוק',     src: `${BASE}videos/tiktok.mp4`,   poster: `${BASE}videos/tiktok-poster.jpg` },
+  { id: 'news',    label: 'חדשות',      src: `${BASE}videos/news.mp4`,     poster: `${BASE}videos/news-poster.jpg` },
   { id: 'birthday', label: 'יום הולדת',  src: `${BASE}videos/birthday.mp4`, poster: `${BASE}videos/birthday-poster.jpg` },
   { id: 'london',   label: 'לונדון',     src: `${BASE}videos/london.mp4`,   poster: `${BASE}videos/london-poster.jpg` },
-  { id: 'tiktok',   label: 'טיקטוק',     src: `${BASE}videos/tiktok.mp4`,   poster: `${BASE}videos/tiktok-poster.jpg` },
 ]
 
 const DRAG_THRESHOLD = 60
